@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.png">
+  <link rel="icon" href="/img/myicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zihan Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="普中科技C51开发板的学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51单片机学习">
+<meta property="og:url" content="http://example.com/2024/10/05/51%E5%8D%95%E7%89%87%E6%9C%BA%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Porpax Chen&#39;s Blog">
+<meta property="og:description" content="普中科技C51开发板的学习">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285017634-a2230256-38e5-48a0-a1d2-ff1d5e5853d9.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285532410-45a41197-53f1-4f5f-9e2e-27ae7e79eacf.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285668122-9448bd68-064d-48b7-9c12-be4a27954ec2.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285798895-a96c17c2-c956-4f3a-8e2e-1597f8a6067d.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709286442325-8c9126dd-e841-496f-92f9-7da10b3cb3b8.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709287328957-2686b900-359e-43cc-9f7e-c7d3dd2c7f99.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709287964034-8c170191-da59-4e02-97a1-d3014dc2129f.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709288697932-5519fac9-21a0-4505-bb50-3ade90e04e0d.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709387179479-2ec0c8c8-f06c-4208-94ca-8d1ef58652e4.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709288817354-9f2f0a43-8449-4af4-9476-3b942d6e11a3.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709386739141-98697032-5f3e-47e6-aad5-b357c9a030b0.jpeg">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709387452103-fe9b57d8-7dff-472d-8849-4729fb60562a.jpeg">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709388920652-5fe75bc2-83b3-4e4a-9d35-83d010e3e36f.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709391691606-3d22dcb6-544b-416f-a96c-d7f5b9ba3752.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709544165334-33729a7a-da8e-4f25-ac8d-a3a955f925c2.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709544115394-1fb25204-24fb-4c80-bb0e-af129b37584c.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709553683782-0b1e645c-f99b-49a4-9edc-1653af2d0a9f.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709555035665-f84ac3a8-6ab8-43ea-9a29-ca33e3ac31b0.png">
+<meta property="article:published_time" content="2024-10-05T13:08:13.000Z">
+<meta property="article:modified_time" content="2024-10-05T16:21:37.751Z">
+<meta property="article:author" content="Zihan Chen">
+<meta property="article:tag" content="单片机">
+<meta property="article:tag" content="51开发板">
+<meta property="article:tag" content="硬件">
+<meta property="article:tag" content="Keil">
+<meta property="article:tag" content="stc-isp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285017634-a2230256-38e5-48a0-a1d2-ff1d5e5853d9.png">
+  
+  
+  
+  <title>51单片机学习 - Porpax Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Porpax&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/cloud.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="51单片机学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-05 21:08" pubdate>
+          October 5, 2024 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">51单片机学习</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on October 6, 2024 am
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="51单片机学习"><a href="#51单片机学习" class="headerlink" title="51单片机学习"></a>51单片机学习</h1><p>教程来自B站：江协科技 ， 非常好的UP主！江协科技的主页：<a target="_blank" rel="noopener" href="https://jiangxiekeji.com/about.html">关于我们 (jiangxiekeji.com)</a></p>
+<h2 id="qsiiN">一、准备材料</h2>
+
+<p>51单片机开发板</p>
+<p>软件：keil5(编写程序), STC-ISP（程序烧录到单片机）</p>
+<p>开发板驱动安装，驱动程序安装在C盘下；设备管理器下，端口显示CH340</p>
+<h2 id="ACXMa">二、点亮LED</h2>
+<h3 id="ewra5">2-1 点亮一个LED</h3>
+
+<p>μVision新建工程</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285017634-a2230256-38e5-48a0-a1d2-ff1d5e5853d9.png" srcset="/img/loading.gif" lazyload></p>
+<p>选择单片机芯片公司Atmel； AT89C52</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285532410-45a41197-53f1-4f5f-9e2e-27ae7e79eacf.png" srcset="/img/loading.gif" lazyload></p>
+<p>新建project后，左侧可以看到工程文件夹，Source Group存放代码，新建C语言文件</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285668122-9448bd68-064d-48b7-9c12-be4a27954ec2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709285798895-a96c17c2-c956-4f3a-8e2e-1597f8a6067d.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="PqAJ2">添加主函数 void main()</h4>
+
+<p>{}两个花括号之间缩进一个tab</p>
+<h4 id="IRtLc">开发板LED模块</h4>
+
+<p>VCC：电源正极</p>
+<p>从VCC，经过电阻</p>
+<p>开发板上电阻写了102，理解为10的后面补2个零，1000&#x3D;1K，最后一位数字代表倍率</p>
+<p>左侧红色的P2数字指连接的单片机引脚，由于二极管特性，当P20输出高电平（5V），LED不会亮；输出低电平（0V），电流由正到负，灯亮。电流方向从右到左</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709286442325-8c9126dd-e841-496f-92f9-7da10b3cb3b8.png" srcset="/img/loading.gif" lazyload></p>
+<p>那么，单片机是如何控制输出的电流大小呢</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709287328957-2686b900-359e-43cc-9f7e-c7d3dd2c7f99.png" srcset="/img/loading.gif" lazyload></p>
+<p>如上，单片机(MCU)内CPU向寄存器内写入1，通过驱动器放大，通过IO口输出5V高电平；写0则低电平</p>
+<h4 id="qYeHy">代码</h4>
+
+<p>记得添加头文件，里面包含了寄存器地址</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709287964034-8c170191-da59-4e02-97a1-d3014dc2129f.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;REGX52.H&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	P2=<span class="hljs-number">0xFE</span>;<span class="hljs-comment">//1111 1110</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) <span class="hljs-comment">//while(1),True,porgram run</span><br>	&#123;<br>		<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>0x 指用的是十六进制</p>
+<p>P2寄存器（8位）写入，控制电流；1111 1110，但机器不识别这样写，用十六进制</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709288697932-5519fac9-21a0-4505-bb50-3ade90e04e0d.png" srcset="/img/loading.gif" lazyload alt="Create HEX File; Build编译"></p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709387179479-2ec0c8c8-f06c-4208-94ca-8d1ef58652e4.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="i5gZc">程序写入单片机</h4>
+
+<p>STC-ISP 软件，找到对应的单片机(STC89C52RC)及串口型号CH340; 购买的板子和B站江协老师的有点不同</p>
+<p>芯片型号必须正确，不然STC-ISP会一直显示”正在检测目标单片机“</p>
+<p>打开.hex文件，并选择”下载&#x2F;编程”</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709288817354-9f2f0a43-8449-4af4-9476-3b942d6e11a3.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709386739141-98697032-5f3e-47e6-aad5-b357c9a030b0.jpeg" srcset="/img/loading.gif" lazyload alt="注意开发板冷启动，开关一下"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;REGX52.H&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	P2=<span class="hljs-number">0x55</span>;<span class="hljs-comment">//0101 0101</span><br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	&#123;<br>		<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709387452103-fe9b57d8-7dff-472d-8849-4729fb60562a.jpeg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="oHMAd">2-2 LED闪烁</h3>
+
+<p>LED在亮灭之间需要延时才能由肉眼看见闪烁，可使用STC-ISP 软件的延时计算器，添加延时函数，系统频率要选择单片机旁边的晶振频率，8051指令集选STC-Y1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;REGX52.H&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;INTRINS.H&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Delay500ms</span><span class="hljs-params">()</span>		<span class="hljs-comment">//@11.0592MHz</span><br>&#123;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> i, j, k;<br><br>	_nop_(); <span class="hljs-comment">//void,nothing but waste time</span><br>	i = <span class="hljs-number">4</span>;<br>	j = <span class="hljs-number">129</span>;<br>	k = <span class="hljs-number">119</span>;<br>	<span class="hljs-keyword">do</span><br>	&#123;<br>		<span class="hljs-keyword">do</span><br>		&#123;<br>			<span class="hljs-keyword">while</span> (--k);<br>		&#125; <span class="hljs-keyword">while</span> (--j);<br>	&#125; <span class="hljs-keyword">while</span> (--i);<br>&#125;<br><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	&#123;<br>		P2=<span class="hljs-number">0xFE</span>; <span class="hljs-comment">//light one led</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0xFF</span>; <span class="hljs-comment">//not light</span><br>		Delay500ms();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>右键打开&lt;INTRINS.H&gt; ，它定义了_nop_<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709388920652-5fe75bc2-83b3-4e4a-9d35-83d010e3e36f.png" srcset="/img/loading.gif" lazyload></p>
+<p>注：<br>#include &lt;INTRINS.H&gt; 是一个C语言头文件，它提供了一些内嵌汇编函数，可以在C语言程序中直接使用汇编指令。 这些函数可以用于访问特殊的CPU指令集，如MMX、SSE、AVX等指令集，以及一些特殊的寄存器和操作。</p>
+<h3 id="IOpmU">2-3 LED流水灯</h3>
+<h4 id="KKQL7">代码</h4>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;REGX52.H&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;INTRINS.H&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Delay500ms</span><span class="hljs-params">()</span>		<span class="hljs-comment">//@12.000MHz</span><br>&#123;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> i, j, k;<br><br>	_nop_();<br>	i = <span class="hljs-number">4</span>;<br>	j = <span class="hljs-number">205</span>;<br>	k = <span class="hljs-number">187</span>;<br>	<span class="hljs-keyword">do</span><br>	&#123;<br>		<span class="hljs-keyword">do</span><br>		&#123;<br>			<span class="hljs-keyword">while</span> (--k);<br>		&#125; <span class="hljs-keyword">while</span> (--j);<br>	&#125; <span class="hljs-keyword">while</span> (--i);<br>&#125;<br><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	&#123;<br>		P2=<span class="hljs-number">0xFE</span>;<span class="hljs-comment">//1111 1110</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0xFD</span>;<span class="hljs-comment">//1111 1101</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0xFB</span>;<span class="hljs-comment">//1111 1011</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0xF7</span>;<span class="hljs-comment">//1111 0111</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0xEF</span>;<span class="hljs-comment">//1110 1111</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0xDF</span>;<span class="hljs-comment">//1101 1111</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0xBF</span>;<span class="hljs-comment">//1011 1111</span><br>		Delay500ms();<br>		P2=<span class="hljs-number">0x7F</span>;<span class="hljs-comment">//0111 1111</span><br>		Delay500ms();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="NZ46s">改造代码：调节流水灯的延时速度</h4>
+
+<p>思路是先生成一个1ms的延时函数，此时Delay1ms()没有参数；写入参数xms， Delay1ms(xms), 但是C语言中需要指定变量的类型。（注：<font style="color:rgb(25, 27, 31);">在Python中，通常情况下不需要显式指定变量的数据类型，因为Python是一种动态类型语言，它会自动根据变量的值来确定其数据类型。R 也是）</font></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Delay1ms</span><span class="hljs-params">()</span>		<span class="hljs-comment">//@11.0592MHz</span><br>&#123;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> i, j;<br><br>	_nop_();<br>	i = <span class="hljs-number">2</span>;<br>	j = <span class="hljs-number">199</span>;<br>	<span class="hljs-keyword">do</span><br>	&#123;<br>		<span class="hljs-keyword">while</span> (--j);<br>	&#125; <span class="hljs-keyword">while</span> (--i);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709391691606-3d22dcb6-544b-416f-a96c-d7f5b9ba3752.png" srcset="/img/loading.gif" lazyload></p>
+<p>单片机中 int 是16位的，而家用计算机是32位；只写int ，默认为(signed) int</p>
+<p>float: 浮点型； double :双精度浮点型 ；用科学计数法表示小数</p>
+<p>所以指定变量类型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">Delay1ms</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> xms)</span><br></code></pre></td></tr></table></figure>
+
+<p> 在后面调用Delay1ms()这个函数时；Delay1ms(500)，将500这个形参赋给unsigned int xms ；就可以调速</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;REGX52.H&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">Delay1ms</span><span class="hljs-params">(<span class="hljs-type">unsigned</span> <span class="hljs-type">int</span> xms)</span>		<span class="hljs-comment">//@11.0592MHz</span><br>&#123;<br>	<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span> i, j;<br>	<span class="hljs-keyword">while</span>(xms)<br>	&#123;<br>		i = <span class="hljs-number">2</span>;<br>		j = <span class="hljs-number">199</span>;<br>		<span class="hljs-keyword">do</span><br>			&#123;<br>			<span class="hljs-keyword">while</span> (--j);<br>		&#125; <span class="hljs-keyword">while</span> (--i);<br>		xms = xms<span class="hljs-number">-1</span>; <span class="hljs-comment">//or can write xms--;</span><br>	&#125;<br>&#125;<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	&#123;<br>		P2=<span class="hljs-number">0xFE</span>;<span class="hljs-comment">//1111 1110</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>		P2=<span class="hljs-number">0xFD</span>;<span class="hljs-comment">//1111 1101</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>		P2=<span class="hljs-number">0xFB</span>;<span class="hljs-comment">//1111 1011</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>		P2=<span class="hljs-number">0xF7</span>;<span class="hljs-comment">//1111 0111</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>		P2=<span class="hljs-number">0xEF</span>;<span class="hljs-comment">//1110 1111</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>		P2=<span class="hljs-number">0xDF</span>;<span class="hljs-comment">//1101 1111</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>		P2=<span class="hljs-number">0xBF</span>;<span class="hljs-comment">//1011 1111</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>		P2=<span class="hljs-number">0x7F</span>;<span class="hljs-comment">//0111 1111</span><br>		Delay1ms(<span class="hljs-number">500</span>);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="oA9BD">三、独立按键</h3>
+
+<p>普中51开发板上独立按键模块和单片机IO连接口</p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709544165334-33729a7a-da8e-4f25-ac8d-a3a955f925c2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709544115394-1fb25204-24fb-4c80-bb0e-af129b37584c.png" srcset="/img/loading.gif" lazyload></p>
+<p>寄存器会检测IO口的电平然后再写</p>
+<p>P2_0是P2口其中一个LED灯；对应参见头文件&lt;REGX52.H&gt;</p>
+<p>P3_1是开发板原理图的K1按键对应的端口号</p>
+<h4 id="j2YoA">代码：按下点亮，松手熄灭</h4>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;REGX52.H&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)<br>	&#123;<br>		<span class="hljs-keyword">if</span>(P3_1==<span class="hljs-number">0</span>)<br>		&#123;<br>			P2_0=<span class="hljs-number">0</span>;<span class="hljs-comment">//lightingLED</span><br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			P2_0=<span class="hljs-number">1</span>;<br>		&#125;<br>	&#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="up791">C51数据运算</h4>
+
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709553683782-0b1e645c-f99b-49a4-9edc-1653af2d0a9f.png" srcset="/img/loading.gif" lazyload></p>
+<p>注：赋值写成 c+1&#x3D;3不可以；右边算出来给左边，不能写成解方程</p>
+<h5 id="tOXjf">位运算</h5>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-number">0011</span> <span class="hljs-number">1100</span>&lt;&lt;<span class="hljs-number">1</span> <span class="hljs-comment">//按位左移1位</span><br><span class="hljs-number">0111</span> <span class="hljs-number">1000</span> <span class="hljs-comment">//移出1位后，高位补零</span><br><span class="hljs-number">0011</span> <span class="hljs-number">1100</span>&gt;&gt;<span class="hljs-number">2</span><br><span class="hljs-number">0000</span> <span class="hljs-number">1111</span><br><br><span class="hljs-number">0001</span> <span class="hljs-number">1000</span> &amp; <span class="hljs-number">0010</span> <span class="hljs-number">1010</span> <span class="hljs-comment">//按位与 -&gt; 0000 1000 //只有全真，即2个1才是1</span><br><span class="hljs-number">0001</span> <span class="hljs-number">1000</span> | <span class="hljs-number">0010</span> <span class="hljs-number">1010</span> <span class="hljs-comment">//按位或 -&gt; 1011 1010</span><br><span class="hljs-number">0001</span> <span class="hljs-number">1000</span> ^ <span class="hljs-number">0010</span> <span class="hljs-number">1010</span> <span class="hljs-comment">//按位异或 -&gt; 0011 0010 //一样为0，不一样为1</span><br>~ <span class="hljs-number">0001</span> <span class="hljs-number">1000</span> <span class="hljs-comment">//按位取反 -&gt; 1110 0111</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="TWqd8">C51基本语句</h4>
+
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1709555035665-f84ac3a8-6ab8-43ea-9a29-ca33e3ac31b0.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/PC%E7%A1%AC%E4%BB%B6/" class="category-chain-item">PC硬件</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/PC%E7%A1%AC%E4%BB%B6/%E5%8D%95%E7%89%87%E6%9C%BA/" class="category-chain-item">单片机</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">#单片机</a>
+      
+        <a href="/tags/51%E5%BC%80%E5%8F%91%E6%9D%BF/">#51开发板</a>
+      
+        <a href="/tags/%E7%A1%AC%E4%BB%B6/">#硬件</a>
+      
+        <a href="/tags/Keil/">#Keil</a>
+      
+        <a href="/tags/stc-isp/">#stc-isp</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>51单片机学习</div>
+      <div>http://example.com/2024/10/05/51单片机学习/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 5, 2024</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/10/06/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C%EF%BC%9ASSH-%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6-%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E7%AA%97%E5%8F%A3/" title="服务器操作：SSH 传输文件 图形界面窗口">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">服务器操作：SSH 传输文件 图形界面窗口</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/05/24%E5%B9%B45%E6%9C%88%E8%A3%85%E6%9C%BA8336C-%E5%8F%8C%E8%B7%AF%E4%B8%BB%E6%9D%BF%E5%AE%89%E8%A3%85%E5%8D%95%E4%B8%AACPU%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="24年5月装机8336C-双路主板安装单个CPU的注意事项">
+                        <span class="hidden-mobile">24年5月装机8336C-双路主板安装单个CPU的注意事项</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
