@@ -4,6 +4,99 @@
   
   
   <entry>
+    <title>FinaleDB数据集下载</title>
+    <link href="/2025/11/30/FinaleDB%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD/"/>
+    <url>/2025/11/30/FinaleDB%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD/</url>
+    
+    <content type="html"><![CDATA[<h1 id="FinaleDB数据集下载"><a href="#FinaleDB数据集下载" class="headerlink" title="FinaleDB数据集下载"></a>FinaleDB数据集下载</h1><h2 id="FinaleDB"><a href="#FinaleDB" class="headerlink" title="FinaleDB"></a>FinaleDB</h2><p>FinaleDB refers to FragmentatIoN AnaLysis of cEll-free DNA DataBase. It is a comprehensive cell-free DNA (cfDNA) fragmentation pattern database to host uniformly processed and quality controlled 2579 paired-end cfDNA WGS datasets from 2505 samples across 23 different pathological conditions in the existing public domain.</p><p>来源：<a href="http://finaledb.research.cchmc.org/">http://finaledb.research.cchmc.org/</a></p><h3 id="数据下载"><a href="#数据下载" class="headerlink" title="数据下载"></a>数据下载</h3><p>FinaleDB数据集需要使用Globus服务，先注册，然后可以使用网页或是本地工具传输数据</p><p>windows本地工具下载指引：<a href="https://docs.globus.org/globus-connect-personal/install/windows/">https://docs.globus.org/globus-connect-personal/install/windows/</a></p><p>下载安装好后会让你创建你自己的文件夹</p><p>在Globus网页端搜索你的文件夹，将这个文件夹连接到本地电脑：默认是在C盘用户路径下，可以新建一个文件夹用来保存下载的数据</p><p>Globus文件传输教程：<a href="https://docs.globus.org/guides/tutorials/manage-files/transfer-files/">https://docs.globus.org/guides/tutorials/manage-files/transfer-files/</a></p><p>网页端选择需要传输的文件，如下图，点击左边的start 传输开始</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1740403224787-8019cd53-6a09-4367-9b89-fd8330121fa7.png" style="zoom:33%;" /><h3 id="更改下载文件路径"><a href="#更改下载文件路径" class="headerlink" title="更改下载文件路径"></a>更改下载文件路径</h3><p>更改下载的文件路径，比如说不想放在默认C盘下</p><p>桌面右下角，鼠标单击右键Globus图标，选择options, access栏点击蓝色的加号，添加文件夹路径；然后回到网页选择设置好的文件夹</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1740405421149-4c6a431e-3acf-4c23-9eac-d1d2b2cc7860.png" style="zoom:33%;" /><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1740405444911-f15f72c0-41b4-442d-a995-472f53bc16df.png" style="zoom: 50%;" />]]></content>
+    
+    
+    <categories>
+      
+      <category>科研学习</category>
+      
+      <category>生物信息</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>FinaleDB</tag>
+      
+      <tag>cfDNA数据库</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>从国家基因组科学数据中心（NGDC）下载测序数据</title>
+    <link href="/2025/11/30/%E4%BB%8E%E5%9B%BD%E5%AE%B6%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%EF%BC%88NGDC%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%B5%8B%E5%BA%8F%E6%95%B0%E6%8D%AE-Aspera%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD/"/>
+    <url>/2025/11/30/%E4%BB%8E%E5%9B%BD%E5%AE%B6%E5%9F%BA%E5%9B%A0%E7%BB%84%E7%A7%91%E5%AD%A6%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%EF%BC%88NGDC%EF%BC%89%E4%B8%8B%E8%BD%BD%E6%B5%8B%E5%BA%8F%E6%95%B0%E6%8D%AE-Aspera%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E8%BD%BD/</url>
+    
+    <content type="html"><![CDATA[<h1 id="从国家基因组科学数据中心（NGDC）下载测序数据-Aspera命令行下载"><a href="#从国家基因组科学数据中心（NGDC）下载测序数据-Aspera命令行下载" class="headerlink" title="从国家基因组科学数据中心（NGDC）下载测序数据-Aspera命令行下载"></a><strong>从国家基因组科学数据中心（NGDC）下载测序数据-Aspera命令行下载</strong></h1><p>网址如下：<a href="https://ngdc.cncb.ac.cn/?lang=zh">https://ngdc.cncb.ac.cn</a></p><p>首先用邮箱注册一个账号，最好是教育邮箱</p><p>要下载的数据： <a href="https://ngdc.cncb.ac.cn/gsa-human/browse/HRA002051">https://ngdc.cncb.ac.cn/gsa-human/browse/HRA002051</a> 页面有数据下载还有样本信息</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756708410501-4b07ac6f-3c69-4b12-ad3d-38e20b687a83.png" style="zoom:50%;" /><h2 id="HTTPS网页端下载"><a href="#HTTPS网页端下载" class="headerlink" title="HTTPS网页端下载"></a>HTTPS网页端下载</h2><p>点进去可以下载，但是每个样本的fastq文件太大了，还是换一种方式吧</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756716075387-d0448a53-cff0-4919-8847-4d251a71dd53.png" style="zoom:50%;" /><h2 id="使用FTP下载数据"><a href="#使用FTP下载数据" class="headerlink" title="使用FTP下载数据"></a>使用FTP下载数据</h2><p>方法参考官方手册：<a href="https://ngdc.cncb.ac.cn/gsa-human/document/GSA-Human_Request_Guide_for_Users_cn.pdf">https://ngdc.cncb.ac.cn/gsa-human/document/GSA-Human_Request_Guide_for_Users_cn.pdf</a></p><p>这里使用XFTP，选择“新建”，弹出新建会话属性页面;名称随便，主机名称为human.big.ac.cn；协议改成FTP</p><p>取消勾选匿名登录，输入NGDC注册时的用户名和密码</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756716766757-2ee986b1-7993-42af-b8dc-302d67d1accb.png" style="zoom:33%;" /><p>显示用户身份验证失败，虽然手册中提到有的数据需要PI才能下载，但是我们这个数据是Open Access的，奇怪，换一种方式吧</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756709983799-728e951a-7af9-4773-ae8d-eb6d1c2b5986.png" style="zoom: 33%;" /><h2 id="使用Aspera命令行下载"><a href="#使用Aspera命令行下载" class="headerlink" title="使用Aspera命令行下载"></a>使用Aspera命令行下载</h2><p>IBM Aspera 是一项革命性的高速文件传输技术。它使用FASP®（Fast Adaptive and Secure Protocol）协议，非常适用于传输大型的文件。相较于FTP、HTTP等，其速度在传输超大文件或远距离传输时更快。</p><h3 id="windows安装Aspera-Connect"><a href="#windows安装Aspera-Connect" class="headerlink" title="windows安装Aspera Connect"></a>windows安装Aspera Connect</h3><p>下载软件：<a href="https://downloads.asperasoft.com/connect2/">https://downloads.asperasoft.com/connect2/</a></p><p>选择IMB Aspera Connect，然后选择默认目录下载</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756711073832-4beb9f81-0ae9-454d-934a-cb698533eea1.png" style="zoom:33%;" /><p>使用参考：<a href="https://blog.csdn.net/qq_40905198/article/details/101909201">https://blog.csdn.net/qq_40905198&#x2F;article&#x2F;details&#x2F;101909201</a></p><p>记录在电脑里的安装位置：C:\Program Files\IBM\AsperaConnect\bin</p><p>找到之后重命名，去掉Aspera Connect的空格</p><h3 id="NGDC下载页面的指引"><a href="#NGDC下载页面的指引" class="headerlink" title="NGDC下载页面的指引"></a>NGDC下载页面的指引</h3><p>点击“数据下载”栏的 Aspera命令行旁边的“帮助”，弹窗给出提示</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756716417633-d6520d42-9471-4f7e-bba6-245a176e9527.png" style="zoom:33%;" /><h3 id="弹窗提示"><a href="#弹窗提示" class="headerlink" title="弹窗提示"></a>弹窗提示</h3><p>点击 Get the key file获得密钥文件</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756711627566-41a633ea-05d5-44ca-8d41-b1679b8412fd.png" style="zoom:50%;" /><h3 id="导入密钥文件"><a href="#导入密钥文件" class="headerlink" title="导入密钥文件"></a>导入密钥文件</h3><p>参考：<a href="https://www.jianshu.com/p/166f9eb8f741">https://www.jianshu.com/p/166f9eb8f741</a></p><p>先下载OpenSSH再导入密钥文件进Aspera；将该文件放入C:\Program Files\IBM\AsperaConnect\etc文件夹中（前面的路径不一定一样，但是找到AsperaConnect的安装路径下的&#x2F;etc就好了）</p><h3 id="运行ascp-exe"><a href="#运行ascp-exe" class="headerlink" title="运行ascp.exe"></a>运行ascp.exe</h3><p>win+R 输入cmd ，先cd 定位到AsperaConnect的安装路径，然后运行ascp.exe</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756714862075-5b485716-8282-4eab-88c9-13f6a1138fc2.png" style="zoom:50%;" /><p>检查密钥，依旧改成我们自己放的&#x2F;etc目录：这里是C:\Program Files\IBM\AsperaConnect\etc</p><p>输入type “C:\Program Files\IBM\AsperaConnect\etc\aspera01.openssh”</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756715154909-57ad0a60-fb3b-46fd-bb43-eee981dd792a.png" style="zoom:50%;" /><h3 id="下载文件："><a href="#下载文件：" class="headerlink" title="下载文件："></a>下载文件：</h3><p>官方给的参考是</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs r"><span class="hljs-punctuation">[</span>path<span class="hljs-operator">/</span>to<span class="hljs-operator">/</span>ascp<span class="hljs-punctuation">]</span> <span class="hljs-operator">-</span>P33001 <span class="hljs-operator">-</span>i <span class="hljs-punctuation">[</span>path<span class="hljs-operator">/</span>to<span class="hljs-operator">/</span>key<span class="hljs-operator">/</span>file<span class="hljs-punctuation">]</span> <span class="hljs-operator">-</span>QT <span class="hljs-operator">-</span>l100m <span class="hljs-operator">-</span>k1 <span class="hljs-operator">-</span>d aspera01<span class="hljs-operator">@</span>download.cncb.ac.cn<span class="hljs-operator">:</span>gsa<span class="hljs-operator">-</span>human<span class="hljs-operator">/</span>HRA002051 <span class="hljs-operator">/</span>your<span class="hljs-operator">/</span>local<span class="hljs-operator">/</span>path<br></code></pre></td></tr></table></figure><p>[path&#x2F;to&#x2F;ascp]：替换为ascp可执行文件的完整路径；</p><p>[path&#x2F;to&#x2F;key&#x2F;file]：替换为用于身份验证的私钥文件的路径；</p><p>[&#x2F;your&#x2F;local&#x2F;path]：文件保存路径</p><p>因此我们这里的路径就替换成如下，可以先准备一个txt文件再慢慢粘贴，注意引号</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs r">C<span class="hljs-operator">:</span><span class="hljs-punctuation">\</span>Program Files<span class="hljs-punctuation">\</span>IBM<span class="hljs-punctuation">\</span>AsperaConnect<span class="hljs-punctuation">\</span>bin<span class="hljs-punctuation">\</span>ascp.exe <span class="hljs-operator">-</span>P33001 <span class="hljs-operator">-</span>i <span class="hljs-string">&quot;F:\Work\SLN_Public\LNdataset\CaImImther2023\NGDCkey\aspera01.openssh&quot;</span>  <span class="hljs-operator">-</span>QT <span class="hljs-operator">-</span>l100m <span class="hljs-operator">-</span>k1 <span class="hljs-operator">-</span>d aspera01<span class="hljs-operator">@</span>download.cncb.ac.cn<span class="hljs-operator">:</span>gsa<span class="hljs-operator">-</span>human<span class="hljs-operator">/</span>HRA002051 <span class="hljs-string">&quot;F:/Work/SLN_Public/LNdataset/CaImImther2023/data/&quot;</span><br></code></pre></td></tr></table></figure><p>由于我们之前已经进入C:\Program Files\IBM\路径了，前面的部分可以省略</p><h3 id="下载开始"><a href="#下载开始" class="headerlink" title="下载开始"></a>下载开始</h3><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756717323771-4ceca7d2-1f0d-4893-be30-1b23c8522e65.png" style="zoom: 33%;" /><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1756718022633-54150ec0-62e7-47be-9268-ca64a2eec8cc.png" style="zoom:33%;" />]]></content>
+    
+    
+    <categories>
+      
+      <category>科研学习</category>
+      
+      <category>生物信息</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>NGDC</tag>
+      
+      <tag>数据下载</tag>
+      
+      <tag>数据库</tag>
+      
+      <tag>生物信息</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2024年3月09日 深圳改装车展</title>
+    <link href="/2025/08/20/2024%E5%B9%B43%E6%9C%8809%E6%97%A5-%E6%B7%B1%E5%9C%B3%E6%94%B9%E8%A3%85%E8%BD%A6%E5%B1%95/"/>
+    <url>/2025/08/20/2024%E5%B9%B43%E6%9C%8809%E6%97%A5-%E6%B7%B1%E5%9C%B3%E6%94%B9%E8%A3%85%E8%BD%A6%E5%B1%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="2024年3月09日-九州车展-深圳改装车展厂商区（一）"><a href="#2024年3月09日-九州车展-深圳改装车展厂商区（一）" class="headerlink" title="2024年3月09日 九州车展-深圳改装车展厂商区（一）"></a>2024年3月09日 九州车展-深圳改装车展厂商区（一）</h1><h2 id="展馆入口"><a href="#展馆入口" class="headerlink" title="展馆入口"></a>展馆入口</h2><p>深圳国际会展中心离市区很远，坐地铁感觉都快要到海边了，场馆附近很空旷，还能看见天空不断有飞机起飞降落，整个会展中心占地非常大，由不同的展馆组合而成，建筑群由玻璃幕墙装饰，非常现代化。需要注意的是这个深圳国际会展中心（宝安）和之前去的深圳会展中心（福田）不是一个地方，不过二者附近都有地铁站，交通还是很方便的。</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/%E5%B1%95%E9%A6%86%E5%85%A5%E5%8F%A3.jpg" alt="展馆入口" style="zoom: 33%;" /><p>在检票口前有三辆靓车组成的装饰景观，远望非常显眼：</p><p>银白色的是一辆巨大的全尺寸SUV，可能是福特勇猛者（Ford Dominator）。时间太久，没有找到正面照片了。橙红色的是Nissan Veilside FFZ400。橙黄色的是AMG GT Black Series，4.0T V8引擎，730匹动力。</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_153729.jpg" alt="IMG_20240309_153729" style="zoom:33%;" /><p>再来一张，太亮眼了；长长的的车头，整个侧面是那么有韵味；这里的调色偏黄了，肉眼看更偏橙色一些。风道部分是碳纤维的，非常醒目；如果整车是黑金或梅奔配色又是另一种沉稳中带张扬的感觉了。我很喜欢这样长车头的车型，比如马自达RX-VISION ，长车头，小鸭尾，像风一样流动；而AMG GT车头线条更扎实有力量感，侧45度的角度每次看都觉得是力量与美的融合。真希望有机会能试试这样的车，不会有点推头吗哈哈。</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/AMG_GT_BS.jpg" alt="AMG_GT_BS" style="zoom:50%;" /><h2 id="展馆内部"><a href="#展馆内部" class="headerlink" title="展馆内部"></a>展馆内部</h2><p>展厅内部有不同的车企布置的展台，和平常的车展没有两样，都是市售的常见家用车，每个展台都有不同的风格，随便逛逛也不错。</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_154455.jpg" alt="IMG_20240309_154455" style="zoom:33%;" /><p>展馆间有宽阔的连廊相接，菱形的玻璃天窗与钢制龙骨组成了巨大的天幕，很有气势。</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/%E5%B1%95%E9%A6%86%E9%97%B4.jpg" alt="展馆间" style="zoom:33%;" /><h2 id="媒体展区"><a href="#媒体展区" class="headerlink" title="媒体展区"></a>媒体展区</h2><h3 id="易车"><a href="#易车" class="headerlink" title="易车"></a>易车</h3><p>易车改装的超长长长特斯拉，之前只在视频上见过，实车确实震撼哈哈。旁边还有模拟器体验，方向盘很飘，跑完一圈可以看到自己的圈速。</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_155515.jpg" alt="IMG_20240309_155515" style="zoom:33%;" /><h3 id="汽车之家"><a href="#汽车之家" class="headerlink" title="汽车之家"></a>汽车之家</h3><p>汽车之家联合北京汽车博物馆带来了一辆赛化的红旗H5汽车，它代表汽车之家赛车队参加了2024年中国CEC汽车耐力锦标赛。</p><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_160353.png" alt="IMG_20240309_160353"></p><p>海湾石油涂装的兰博基尼第四代旗舰Murciélago，若能打开，就会展现出漂亮的剪刀门，可惜车展人多手杂，归属私人所有只能看看。圆润的线条与其他新车相比虽少了一份流行，但有着千禧年那个时代的印迹；它静静地在那里，附近也没有很多人驻足，但是发现它竟然是上了粤牌的，能被爱车之人维护并能够顺利过年检上路，真好，这么好的车就应该飞驰在路上而不是被静静观赏。</p><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_160320.png" alt="IMG_20240309_160320"></p><h2 id="厂商展区"><a href="#厂商展区" class="headerlink" title="厂商展区"></a>厂商展区</h2><h3 id="领克"><a href="#领克" class="headerlink" title="领克"></a>领克</h3><p>主打性能运动的车型，领克是我很欣赏的品牌；起码没有一味向沙发，冰箱大彩电的风格上靠</p><h4 id="领克03-Cyan"><a href="#领克03-Cyan" class="headerlink" title="领克03+ Cyan"></a>领克03+ Cyan</h4><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_155134.png" alt="IMG_20240309_155134"></p><h4 id="领克03-2-0T-机械涡轮双增压赛化版"><a href="#领克03-2-0T-机械涡轮双增压赛化版" class="headerlink" title="领克03+ 2.0T 机械涡轮双增压赛化版"></a>领克03+ 2.0T 机械涡轮双增压赛化版</h4><p>内部已经做了极致的赛化处理，赛车桶椅，快拆方向盘，防滚架，内饰和副驾后排座椅都拆空</p><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_155259.png" alt="IMG_20240309_155259"></p><p>动力系统相比量产版没有变化，但是机脚进行了强化 ；镂空碳纤维机盖和拉花，帅。毕竟是真的下赛道，就没有浮夸的大包围，前铲，大宽体等装饰了（我称之为“视觉系风格”）</p><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/IMG_20240309_155124.png" alt="IMG_20240309_155124"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>生活</category>
+      
+      <category>车展</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>车展</tag>
+      
+      <tag>跑车</tag>
+      
+      <tag>新能源汽车</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Python基础-字符串与索引，循环</title>
     <link href="/2024/12/22/Python%E5%9F%BA%E7%A1%80-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%BE%AA%E7%8E%AF/"/>
     <url>/2024/12/22/Python%E5%9F%BA%E7%A1%80-%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%BE%AA%E7%8E%AF/</url>
