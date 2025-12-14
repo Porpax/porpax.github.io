@@ -1,0 +1,825 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.png">
+  <link rel="icon" href="/img/myicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zihan Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Qupath 多色荧光图像Object classification and Pixel classification">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qupath mIF多色荧光图像的两种分类器训练">
+<meta property="og:url" content="http://example.com/2025/12/14/[%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86]Qupath_%20mIF%E5%A4%9A%E8%89%B2%E8%8D%A7%E5%85%89%E5%9B%BE%E5%83%8F%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%88%86%E7%B1%BB%E5%99%A8%E8%AE%AD%E7%BB%83/index.html">
+<meta property="og:site_name" content="Porpax Chen&#39;s Blog">
+<meta property="og:description" content="Qupath 多色荧光图像Object classification and Pixel classification">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765162217633-28b08c86-52c3-4621-b968-792cb4a34815.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765163189951-86ade158-fec3-4783-b2ec-942d485b2b97.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765163534135-db5b713c-fdee-44c4-b87a-b1930948be76.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765162984832-1dbd22d9-e020-4eb4-be4b-2c8c4b3472ac.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751368336355-243aa5a4-b10b-4b16-bb4c-5ecec3de13cc.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/34815153/1751368275094-1941db41-f850-4cec-a0ba-15a1b5b4c5b4.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751368466889-6888e36b-87e5-4a7f-a35a-57c00a6fd6c9.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2025/png/34815153/1764920567967-2981b935-5833-42c9-9f17-18b6c95b5106.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764920918839-934c8370-bbcf-44ea-8ea7-bc6f141256d6.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764920867706-17bb0994-d953-44f8-9d6b-e433c6875ec7.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764921694531-bd909948-e0c7-41bc-89f9-8fbaa2519397.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764922836155-d5664b9e-4049-44bb-9fb9-f07fcc9fbfb1.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764923354388-0f555c08-4a06-4dd8-b5f9-7fb49364ca82.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764923003414-474e94cf-4acc-4766-9dda-ece3250c8815.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764923702257-7b615810-a219-481d-886f-c3b1759ee0af.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764922086717-60ac9aea-cfff-4c62-a02e-143bb1fa2d5a.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764922376338-a947bf63-c61c-448a-94ed-3dbfec768e5d.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764924215514-8dfe13a3-65bf-4f67-9efb-d83ef6a5b73a.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764924816000-f96aec15-9fc2-4f0b-8fb2-6019f5d46525.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764924955935-dad08037-e742-42bb-894a-652b380c63f0.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765160378797-e7a9361c-22d7-4969-b92b-3ee87fd971d5.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764925102997-f6873690-2fa2-4669-8926-c9f236aea0d7.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1758263435812-4175cac3-005a-4bc5-bed6-1eba22acb38a.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1758263569872-bbf186f1-7a3f-4cbb-a197-9c0210004e79.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765160660203-c5513019-2b73-484c-a03b-706b7758f153.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765160456321-19037d8f-738e-456d-8a8f-ff2b3ee07c35.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765161398746-67be9d59-8472-4cb5-83ca-da9d9ed87b3c.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765161376171-5b27a2ca-c000-4abb-8d25-590ea77efbc0.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751785762726-01c4b7fd-c4d5-4f05-b079-f82355792610.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751785953893-76c50e46-07c9-46f7-aa99-b6e55d7c7aa8.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751786124774-a23b4546-c9ba-45a6-8acd-d375eaf363b8.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751786199286-3c08d646-2b35-4391-8983-2254123bb128.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880421083-282789ec-94c5-4351-9c61-44e15ca5a6e4.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880525269-c9b1d3a9-dde6-4790-bd31-a5c9dd1edec6.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880627469-e4a3a0cc-1436-4f21-9c67-e93b8b423c89.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880659256-cbb7b105-697d-4b83-926c-de012682d37b.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880724431-6ae10f4d-b267-44bd-9a60-dc6d542410a3.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880747842-6717e4dc-0c25-4021-9e34-748666870058.png">
+<meta property="article:published_time" content="2025-12-14T14:00:31.000Z">
+<meta property="article:modified_time" content="2025-12-14T16:40:24.167Z">
+<meta property="article:author" content="Zihan Chen">
+<meta property="article:tag" content="Qupath">
+<meta property="article:tag" content="mIF">
+<meta property="article:tag" content="分类器训练">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765162217633-28b08c86-52c3-4621-b968-792cb4a34815.png">
+  
+  
+  
+  <title>Qupath mIF多色荧光图像的两种分类器训练 - Porpax Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Porpax&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/seacloud.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Qupath mIF多色荧光图像的两种分类器训练"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-14 22:00" pubdate>
+          December 14, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Qupath mIF多色荧光图像的两种分类器训练</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on December 15, 2025 am
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Qupath-mIF多色荧光图像的两种分类器训练"><a href="#Qupath-mIF多色荧光图像的两种分类器训练" class="headerlink" title="Qupath: mIF多色荧光图像的两种分类器训练"></a>Qupath: mIF多色荧光图像的两种分类器训练</h1><h2 id="0-开始一个新项目"><a href="#0-开始一个新项目" class="headerlink" title="0.开始一个新项目"></a>0.开始一个新项目</h2><h3 id="0-1新建project"><a href="#0-1新建project" class="headerlink" title="0.1新建project"></a>0.1新建project</h3><p>File - Project - Creat project</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765162217633-28b08c86-52c3-4621-b968-792cb4a34815.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<h4 id="0-1-1project下的数据结构"><a href="#0-1-1project下的数据结构" class="headerlink" title="0.1.1project下的数据结构"></a>0.1.1project下的数据结构</h4><p>在project文件目录下，data数据是我们导入的图像；classifiers是我们训练的两种分类器，后文会提到设置方法</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765163189951-86ade158-fec3-4783-b2ec-942d485b2b97.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765163534135-db5b713c-fdee-44c4-b87a-b1930948be76.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h3 id="0-3添加图像"><a href="#0-3添加图像" class="headerlink" title="0.3添加图像"></a>0.3添加图像</h3><p>Add images，在弹出的panel里选择文件位置；注意set image type ，这里是荧光图像</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765162984832-1dbd22d9-e020-4eb4-be4b-2c8c4b3472ac.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<h2 id="1-1打开别人给的project文件"><a href="#1-1打开别人给的project文件" class="headerlink" title="1.1打开别人给的project文件"></a>1.1打开别人给的project文件</h2><p>面板左侧选择”Open project “- 点击.qpproj  文件</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751368336355-243aa5a4-b10b-4b16-bb4c-5ecec3de13cc.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<img src="https://cdn.nlark.com/yuque/0/2025/png/34815153/1751368275094-1941db41-f850-4cec-a0ba-15a1b5b4c5b4.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<p>在弹出的面板选择 update URIs- replacement URI ,双击此栏的空白处，将路径替换成现有的tiff文件；</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751368466889-6888e36b-87e5-4a7f-a35a-57c00a6fd6c9.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;" />
+
+<p>这样就接受了此 project里的分析文件，并且可以查看文件里的Annotation选区</p>
+<h2 id="2-训练-Object-classification"><a href="#2-训练-Object-classification" class="headerlink" title="2.训练 Object classification"></a>2.训练 Object classification</h2><p>我们想要Qupath根据每个细胞表达的荧光通道强度，训练一个分类器自动识别不同的细胞类型</p>
+<h3 id="2-1-Brightness-amp-contrast调节荧光通道"><a href="#2-1-Brightness-amp-contrast调节荧光通道" class="headerlink" title="2.1 Brightness&amp;contrast调节荧光通道"></a>2.1 Brightness&amp;contrast调节荧光通道</h3><p>首先在左侧的project下打开相应的文件，然后点击brightness&amp;contrast按钮<img src="https://cdn.nlark.com/yuque/0/2025/png/34815153/1764920567967-2981b935-5833-42c9-9f17-18b6c95b5106.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />，它由两个半圆形图案组成</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764920918839-934c8370-bbcf-44ea-8ea7-bc6f141256d6.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<p>点击可看到除DAPI外，染了6种颜色，对应6个通道，双击小方块可以更改不同的颜色；Sample AF 是类似遮罩补光的</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764920867706-17bb0994-d953-44f8-9d6b-e433c6875ec7.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<p><strong>操作：</strong></p>
+<p>以Opal 570为例，只保留DAPI通道和Opal 570通道show（打勾），选中Opal 570通道，按Auto按钮自动调节，然后再拖动channel min,channel max按钮，根据图像调节，这一步比较主观；viewer gamma通常设置的接近5.</p>
+<p>对于每张图像，每个通道需要分别调节</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764921694531-bd909948-e0c7-41bc-89f9-8fbaa2519397.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;" />
+
+<h3 id="2-2-添加选区"><a href="#2-2-添加选区" class="headerlink" title="2.2 添加选区"></a>2.2 添加选区</h3><p>可以使用魔棒工具或图形圈选区域，选择的区域在Annotations栏下；右键可锁定或解锁选区，选区记得Lock，养成好习惯</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764922836155-d5664b9e-4049-44bb-9fb9-f07fcc9fbfb1.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<h4 id="2-2-1-新建选区名称"><a href="#2-2-1-新建选区名称" class="headerlink" title="2.2.1 新建选区名称"></a>2.2.1 新建选区名称</h4><p>点击Auto set 旁边的小按钮</p>
+<p>注：点击选区的小方块也同样可以更改颜色</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764923354388-0f555c08-4a06-4dd8-b5f9-7fb49364ca82.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<h4 id="2-2-2-为选区命名"><a href="#2-2-2-为选区命名" class="headerlink" title="2.2.2 为选区命名"></a>2.2.2 为选区命名</h4><p>右键选区，set classification，选择对应的选区名称</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764923003414-474e94cf-4acc-4766-9dda-ece3250c8815.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<p>3.删除选区</p>
+<p>左侧找到选区，delete键</p>
+<h4 id="2-2-3-注：选区不见了？点击空心方块这个按钮"><a href="#2-2-3-注：选区不见了？点击空心方块这个按钮" class="headerlink" title="2.2.3 注：选区不见了？点击空心方块这个按钮"></a>2.2.3 注：选区不见了？点击空心方块这个按钮</h4><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764923702257-7b615810-a219-481d-886f-c3b1759ee0af.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h3 id="2-3-细胞识别"><a href="#2-3-细胞识别" class="headerlink" title="2.3  细胞识别"></a>2.3  细胞识别</h3><p>选择想要的选区，接下来细胞识别：Analyze- Cell detection- Cell dection</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764922086717-60ac9aea-cfff-4c62-a02e-143bb1fa2d5a.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>根据组织类型进行调节，如细胞密集的组织，减小cell expansion</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764922376338-a947bf63-c61c-448a-94ed-3dbfec768e5d.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<p>跑完了会展现许多细胞轮廓，同样的，这两个绿色轮廓的按钮可以调节细胞轮廓的展现形式；或者取消显示；</p>
+<p>左下角会展示不同选区内的细胞数量和其他参数</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764924215514-8dfe13a3-65bf-4f67-9efb-d83ef6a5b73a.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<h3 id="2-4-Create-single-measurement-classifier"><a href="#2-4-Create-single-measurement-classifier" class="headerlink" title="2.4 Create single measurement classifier"></a>2.4 Create single measurement classifier</h3><h4 id="2-4-1-从顶部栏选择Classify-Object-classification-Create-single-measurement-classifier"><a href="#2-4-1-从顶部栏选择Classify-Object-classification-Create-single-measurement-classifier" class="headerlink" title="2.4.1 从顶部栏选择Classify-Object classification-Create single measurement classifier"></a>2.4.1 从顶部栏选择Classify-Object classification-Create single measurement classifier</h4><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764924816000-f96aec15-9fc2-4f0b-8fb2-6019f5d46525.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<h4 id="2-4-2-关键：设定阈值"><a href="#2-4-2-关键：设定阈值" class="headerlink" title="2.4.2 关键：设定阈值"></a>2.4.2 关键：设定阈值</h4><ul>
+<li><strong>Channel filter</strong>: Opal 570 (当前要选择的通道)</li>
+<li>**Measurement: **可以选择Nucleus,Cell或者Cytoplasm；根据染料所染蛋白在细胞上的定位来选择，比如这里的Opal 570染CD11c， 通常表达在细胞膜上；一般选择表达的平均值mean; 因此measurement栏中我们选择Cell: Opal 570 mean</li>
+</ul>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764924955935-dad08037-e742-42bb-894a-652b380c63f0.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<ul>
+<li>**Threshold: <strong><font style="color:#DF2A3F;">勾选Live preview,</font></strong> **打开brightness&amp;contrast，显示Opal 570通道，对照图像判断分类是否准确，阈值是否需要调节（可拖动右边直方图上的竖线或直接输入数字）；鼠标移动到细胞上，右下角会显示信号强度范围<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765160378797-e7a9361c-22d7-4969-b92b-3ee87fd971d5.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></li>
+<li><strong>Above threshold:</strong> CD11c</li>
+<li>**Below threshold: **Unclassified</li>
+</ul>
+<p>注意保存Classifier name ，最后点击Apply；**<font style="color:#D22D8D;">每个通道都依此设置，并且记录下每个样本，每个通道设定的阈值！</font>**</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1764925102997-f6873690-2fa2-4669-8926-c9f236aea0d7.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h3 id="2-5-composite-classifier混合分类器"><a href="#2-5-composite-classifier混合分类器" class="headerlink" title="2.5 composite classifier混合分类器"></a>2.5 composite classifier混合分类器</h3><p>所有通道的分类器都做完后，创建composite classifier混合分类器</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1758263435812-4175cac3-005a-4bc5-bed6-1eba22acb38a.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1758263569872-bbf186f1-7a3f-4cbb-a197-9c0210004e79.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<p>所有分类器都设置完成，annotation栏左下角会展示分类器标记的不同类型细胞的数量然后就可以得到被标记上不同颜色的细胞了，可以更改设定的颜色，红色是没有分类标记的细胞；</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765160660203-c5513019-2b73-484c-a03b-706b7758f153.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<h4 id="2-5-1-加载已经训练好的object-classifier"><a href="#2-5-1-加载已经训练好的object-classifier" class="headerlink" title="2.5.1 加载已经训练好的object classifier"></a>2.5.1 加载已经训练好的object classifier</h4><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765160456321-19037d8f-738e-456d-8a8f-ff2b3ee07c35.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h2 id="3-数据导出"><a href="#3-数据导出" class="headerlink" title="3.数据导出"></a>3.数据导出</h2><p>为了方便我们进一步统计和可视化，qupath数据需要导出，导出的文件是txt格式的</p>
+<p><strong>导出每个细胞的classification</strong>: Measure-Show annotation measurements</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765161398746-67be9d59-8472-4cb5-83ca-da9d9ed87b3c.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<p><strong>导出选区：</strong></p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1765161376171-5b27a2ca-c000-4abb-8d25-590ea77efbc0.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<h2 id="4-ImageJ截图导出"><a href="#4-ImageJ截图导出" class="headerlink" title="4.ImageJ截图导出"></a>4.ImageJ截图导出</h2><p>导出带有ROI圈选的，两色荧光通道的图像</p>
+<p>1.首先打开qupath object，选择想要的切片区域，选择窗口上方brightness&amp;contrast 按钮（蓝框标示）</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751785762726-01c4b7fd-c4d5-4f05-b079-f82355792610.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<p>2.在弹出的方框，首先调整好不同荧光通道的亮度；先调整细胞核的亮度；这里的蓝：FITC&#x2F;525nm是DNA染料;绿:CD68；黄：CD11c；红：CD8A</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751785953893-76c50e46-07c9-46f7-aa99-b6e55d7c7aa8.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+
+
+<p>3.调整好荧光通道和适合的视野；右上角点击imageJ按钮- send snapshot to ImageJ</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751786124774-a23b4546-c9ba-45a6-8acd-d375eaf363b8.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<ol start="4">
+<li>在ImageJ 菜单栏选择 file - save as - Tiff；保存完成</li>
+</ol>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751786199286-3c08d646-2b35-4391-8983-2254123bb128.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<h2 id="5-训练像素分类器-Pixel-classification"><a href="#5-训练像素分类器-Pixel-classification" class="headerlink" title="5.训练像素分类器 Pixel classification"></a>5.训练像素分类器 Pixel classification</h2><p>识别选择 CD8和CD11c细胞区，此外还有一个negative</p>
+<p>首先使用魔棒工具，圈选想要的区域</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880421083-282789ec-94c5-4351-9c61-44e15ca5a6e4.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>Auto set - Add- Add class 添加类别，如CD8_regoin</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880525269-c9b1d3a9-dde6-4790-bd31-a5c9dd1edec6.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<p>新建后的类别在annotation栏下可以找到</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880627469-e4a3a0cc-1436-4f21-9c67-e93b8b423c89.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+
+<p>选择区域，添加类型：set classification</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880659256-cbb7b105-697d-4b83-926c-de012682d37b.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p> 区域选择好后开始训练</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880724431-6ae10f4d-b267-44bd-9a60-dc6d542410a3.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>在Pixel classifier 选择 Live prediction</p>
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1751880747842-6717e4dc-0c25-4021-9e34-748666870058.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/" class="category-chain-item">科研学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="category-chain-item">图像处理</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Qupath/">#Qupath</a>
+      
+        <a href="/tags/mIF/">#mIF</a>
+      
+        <a href="/tags/%E5%88%86%E7%B1%BB%E5%99%A8%E8%AE%AD%E7%BB%83/">#分类器训练</a>
+      
+        <a href="/tags/%E6%95%99%E7%A8%8B/">#教程</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Qupath mIF多色荧光图像的两种分类器训练</div>
+      <div>http://example.com/2025/12/14/[图像处理]Qupath_ mIF多色荧光图像的两种分类器训练/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>December 14, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/30/FinaleDB%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD/" title="FinaleDB数据集下载">
+                        <span class="hidden-mobile">FinaleDB数据集下载</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
