@@ -1,0 +1,703 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.png">
+  <link rel="icon" href="/img/myicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zihan Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="泛癌多来源单细胞数据的批次矫正方法与轮廓系数评估">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[批次效应评估] 泛癌多样本来源的数据">
+<meta property="og:url" content="http://example.com/2026/09/13/%E3%80%90%E6%89%B9%E6%AC%A1%E6%95%88%E5%BA%94%E8%AF%84%E4%BC%B0%E3%80%91%E6%B3%9B%E7%99%8C%E5%A4%9A%E6%A0%B7%E6%9C%AC%E6%9D%A5%E6%BA%90%E7%9A%84%E6%95%B0%E6%8D%AE/index.html">
+<meta property="og:site_name" content="Porpax Chen&#39;s Blog">
+<meta property="og:description" content="泛癌多来源单细胞数据的批次矫正方法与轮廓系数评估">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1777525830690-b06886cc-aba1-4343-a8ca-91dd121f05a8.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1777356564143-4f1a0f43-ec7e-45e3-83c0-140a6e548a9f.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1777356579839-d7f709ac-7c4e-4350-b27a-aced285ed87e.png">
+<meta property="article:published_time" content="2026-09-12T17:19:02.000Z">
+<meta property="article:modified_time" content="2026-09-12T17:22:09.296Z">
+<meta property="article:author" content="Zihan Chen">
+<meta property="article:tag" content="单细胞">
+<meta property="article:tag" content="批次效应">
+<meta property="article:tag" content="Seurat">
+<meta property="article:tag" content="泛癌">
+<meta property="article:tag" content="Harmony">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1777525830690-b06886cc-aba1-4343-a8ca-91dd121f05a8.png">
+  
+  
+  
+  <title>[批次效应评估] 泛癌多样本来源的数据 - Porpax Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Porpax&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/seacloud.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="[批次效应评估] 泛癌多样本来源的数据"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-09-13 01:19" pubdate>
+          September 13, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">[批次效应评估] 泛癌多样本来源的数据</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on September 13, 2026 am
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="批次效应评估-泛癌多样本来源的数据"><a href="#批次效应评估-泛癌多样本来源的数据" class="headerlink" title="[批次效应评估] 泛癌多样本来源的数据"></a>[批次效应评估] 泛癌多样本来源的数据</h1><p>针对不同样本来源的泛癌数据，pan-cancer怎么做</p>
+<p>发现各组有各组的风格，比如张泽民组更偏向R seurat流程，pan-cancer文章普遍用的是harmony；没有明确说去批次是按样本还是数据集；评估批次效应的方法也没有提到</p>
+<p>而王凌华组23年naruew medicine 这一篇就说了他们比较了rPCA和harmony方法，使用轮廓系数评估</p>
+<p>总之做法不同，有理即可</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1777525830690-b06886cc-aba1-4343-a8ca-91dd121f05a8.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="评估批次矫正效果：Silhouette-Score"><a href="#评估批次矫正效果：Silhouette-Score" class="headerlink" title="评估批次矫正效果：Silhouette Score"></a>评估批次矫正效果：Silhouette Score</h2><p>王凌华组这一篇Pan-cancer T cell atlas links a cellular stress response state to immunotherapy resistance，用Silhouette Score（轮廓系数）评估harmony和rPCA两种方法的批次矫正效果  （最后他们选了Seurat rPCA）</p>
+<p>核心思想是：如果批次效应很强，同一个批次的细胞会抱团（即使细胞类型不同），那么Silhouette Score会<strong>很高</strong></p>
+<p>如果矫正得好，相同批次的细胞应该分散开，Silhouette Score会<strong>降低</strong></p>
+<h4 id="对下面公式的解释"><a href="#对下面公式的解释" class="headerlink" title="对下面公式的解释"></a><strong>对下面公式的解释</strong></h4><p>对于每个细胞i：</p>
+<p><strong>a(i)</strong> &#x3D; 这个细胞和<strong>同一批次</strong>其他细胞的平均距离</p>
+<ul>
+<li>批次矫正好时：a(i) <strong>大</strong>（同批次分散）  ；同批次细胞聚集不好，如 T细胞、B细胞、髓系细胞都因为”来自批次1”而挤在一起</li>
+</ul>
+<p><strong>b(i)</strong> &#x3D; 这个细胞到<strong>最近的另一个批次</strong>的平均距离</p>
+<ul>
+<li>批次矫正好时：b(i) <strong>小</strong>（批次间混合好）</li>
+</ul>
+<p><strong>Silhouette Score &#x3D; (b - a) &#x2F; max(a, b)</strong></p>
+<ul>
+<li>范围：-1 到 +1</li>
+<li>**<font style="color:#D22D8D;">接近+1</font>**：细胞和自己批次很像，和其他批次很不像 → <strong><font style="color:#D22D8D;">批次效应强</font></strong></li>
+<li>**<font style="color:#D22D8D;">接近0或负数</font>**：细胞和自己批次不那么像，批次混合好 → <strong><font style="color:#D22D8D;">批次矫正好</font></strong></li>
+</ul>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1777356564143-4f1a0f43-ec7e-45e3-83c0-140a6e548a9f.png" srcset="/img/loading.gif" lazyload></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1777356579839-d7f709ac-7c4e-4350-b27a-aced285ed87e.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br></pre></td><td class="code"><pre><code class="hljs r">library<span class="hljs-punctuation">(</span>Seurat<span class="hljs-punctuation">)</span><br>library<span class="hljs-punctuation">(</span>cluster<span class="hljs-punctuation">)</span><br>library<span class="hljs-punctuation">(</span>ggplot2<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># =============================================================================</span><br><span class="hljs-comment"># 计算Silhouette Score评估批次效应</span><br><span class="hljs-comment"># =============================================================================</span><br><br><span class="hljs-comment"># 假设你已经有整合好的Seurat对象</span><br><span class="hljs-comment"># seu_integrated: 批次矫正后的对象</span><br><span class="hljs-comment"># seu_raw: 批次矫正前的对象（用PCA降维）</span><br><br><span class="hljs-comment"># 步骤1: 提取降维后的坐标</span><br><span class="hljs-comment"># 批次矫正前（PCA空间）</span><br>pca_coords <span class="hljs-operator">&lt;-</span> Embeddings<span class="hljs-punctuation">(</span>seu_raw<span class="hljs-punctuation">,</span> reduction <span class="hljs-operator">=</span> <span class="hljs-string">&quot;pca&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">]</span><br><br><span class="hljs-comment"># 批次矫正后（Harmony或rPCA空间）</span><br>harmony_coords <span class="hljs-operator">&lt;-</span> Embeddings<span class="hljs-punctuation">(</span>seu_integrated<span class="hljs-punctuation">,</span> reduction <span class="hljs-operator">=</span> <span class="hljs-string">&quot;harmony&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">]</span><br><span class="hljs-comment"># 或者</span><br><span class="hljs-comment"># rpca_coords &lt;- Embeddings(seu_integrated, reduction = &quot;integrated.dr&quot;)[, 1:30]</span><br><br><span class="hljs-comment"># 步骤2: 计算Silhouette Score</span><br><span class="hljs-comment"># 批次信息</span><br>batch_labels <span class="hljs-operator">&lt;-</span> seu_raw<span class="hljs-operator">$</span>dataset  <span class="hljs-comment"># 或 seu_raw$sample_id</span><br><br><span class="hljs-comment"># 计算距离矩阵（使用欧氏距离）</span><br>dist_before <span class="hljs-operator">&lt;-</span> dist<span class="hljs-punctuation">(</span>pca_coords<span class="hljs-punctuation">)</span><br>dist_after <span class="hljs-operator">&lt;-</span> dist<span class="hljs-punctuation">(</span>harmony_coords<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 计算Silhouette Score</span><br>sil_before <span class="hljs-operator">&lt;-</span> silhouette<span class="hljs-punctuation">(</span><span class="hljs-built_in">as.numeric</span><span class="hljs-punctuation">(</span>factor<span class="hljs-punctuation">(</span>batch_labels<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> dist_before<span class="hljs-punctuation">)</span><br>sil_after <span class="hljs-operator">&lt;-</span> silhouette<span class="hljs-punctuation">(</span><span class="hljs-built_in">as.numeric</span><span class="hljs-punctuation">(</span>factor<span class="hljs-punctuation">(</span>batch_labels<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> dist_after<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 步骤3: 可视化对比</span><br><span class="hljs-comment"># 提取分数</span><br>sil_scores_before <span class="hljs-operator">&lt;-</span> data.frame<span class="hljs-punctuation">(</span><br>  score <span class="hljs-operator">=</span> sil_before<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  batch <span class="hljs-operator">=</span> batch_labels<span class="hljs-punctuation">,</span><br>  stage <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Before correction&quot;</span><br><span class="hljs-punctuation">)</span><br><br>sil_scores_after <span class="hljs-operator">&lt;-</span> data.frame<span class="hljs-punctuation">(</span><br>  score <span class="hljs-operator">=</span> sil_after<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  batch <span class="hljs-operator">=</span> batch_labels<span class="hljs-punctuation">,</span><br>  stage <span class="hljs-operator">=</span> <span class="hljs-string">&quot;After correction&quot;</span><br><span class="hljs-punctuation">)</span><br><br>sil_scores <span class="hljs-operator">&lt;-</span> rbind<span class="hljs-punctuation">(</span>sil_scores_before<span class="hljs-punctuation">,</span> sil_scores_after<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 箱线图对比</span><br>ggplot<span class="hljs-punctuation">(</span>sil_scores<span class="hljs-punctuation">,</span> aes<span class="hljs-punctuation">(</span>x <span class="hljs-operator">=</span> stage<span class="hljs-punctuation">,</span> y <span class="hljs-operator">=</span> score<span class="hljs-punctuation">,</span> fill <span class="hljs-operator">=</span> stage<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  geom_boxplot<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  geom_hline<span class="hljs-punctuation">(</span>yintercept <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> linetype <span class="hljs-operator">=</span> <span class="hljs-string">&quot;dashed&quot;</span><span class="hljs-punctuation">,</span> color <span class="hljs-operator">=</span> <span class="hljs-string">&quot;red&quot;</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  labs<span class="hljs-punctuation">(</span><br>    title <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Batch Effect Evaluation&quot;</span><span class="hljs-punctuation">,</span><br>    subtitle <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Lower score = Better batch mixing&quot;</span><span class="hljs-punctuation">,</span><br>    y <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Silhouette Score&quot;</span><span class="hljs-punctuation">,</span><br>    x <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span><br>  <span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  theme_bw<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  theme<span class="hljs-punctuation">(</span>legend.position <span class="hljs-operator">=</span> <span class="hljs-string">&quot;none&quot;</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 统计摘要</span><br>cat<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;=== Silhouette Score 统计 ===\n&quot;</span><span class="hljs-punctuation">)</span><br>cat<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;矫正前平均分数:&quot;</span><span class="hljs-punctuation">,</span> mean<span class="hljs-punctuation">(</span>sil_scores_before<span class="hljs-operator">$</span>score<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;\n&quot;</span><span class="hljs-punctuation">)</span><br>cat<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;矫正后平均分数:&quot;</span><span class="hljs-punctuation">,</span> mean<span class="hljs-punctuation">(</span>sil_scores_after<span class="hljs-operator">$</span>score<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;\n&quot;</span><span class="hljs-punctuation">)</span><br>cat<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;分数降低:&quot;</span><span class="hljs-punctuation">,</span> mean<span class="hljs-punctuation">(</span>sil_scores_before<span class="hljs-operator">$</span>score<span class="hljs-punctuation">)</span> <span class="hljs-operator">-</span> mean<span class="hljs-punctuation">(</span>sil_scores_after<span class="hljs-operator">$</span>score<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;\n&quot;</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># =============================================================================</span><br><span class="hljs-comment"># 完整流程：对比Harmony和rPCA</span><br><span class="hljs-comment"># =============================================================================</span><br><br><span class="hljs-comment"># 准备数据</span><br>seu_combined <span class="hljs-operator">&lt;-</span> NormalizeData<span class="hljs-punctuation">(</span>seu_combined<span class="hljs-punctuation">)</span><br>seu_combined <span class="hljs-operator">&lt;-</span> FindVariableFeatures<span class="hljs-punctuation">(</span>seu_combined<span class="hljs-punctuation">,</span> nfeatures <span class="hljs-operator">=</span> <span class="hljs-number">2000</span><span class="hljs-punctuation">)</span><br>seu_combined <span class="hljs-operator">&lt;-</span> ScaleData<span class="hljs-punctuation">(</span>seu_combined<span class="hljs-punctuation">)</span><br>seu_combined <span class="hljs-operator">&lt;-</span> RunPCA<span class="hljs-punctuation">(</span>seu_combined<span class="hljs-punctuation">,</span> npcs <span class="hljs-operator">=</span> <span class="hljs-number">30</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 方法1: Harmony矫正</span><br>library<span class="hljs-punctuation">(</span>harmony<span class="hljs-punctuation">)</span><br>seu_harmony <span class="hljs-operator">&lt;-</span> RunHarmony<span class="hljs-punctuation">(</span><br>  seu_combined<span class="hljs-punctuation">,</span><br>  group.by.vars <span class="hljs-operator">=</span> <span class="hljs-string">&quot;dataset&quot;</span><span class="hljs-punctuation">,</span><br>  reduction <span class="hljs-operator">=</span> <span class="hljs-string">&quot;pca&quot;</span><span class="hljs-punctuation">,</span><br>  dims.use <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><br><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 方法2: rPCA矫正（Seurat整合）</span><br>seu_list <span class="hljs-operator">&lt;-</span> SplitObject<span class="hljs-punctuation">(</span>seu_combined<span class="hljs-punctuation">,</span> split.by <span class="hljs-operator">=</span> <span class="hljs-string">&quot;dataset&quot;</span><span class="hljs-punctuation">)</span><br>seu_list <span class="hljs-operator">&lt;-</span> lapply<span class="hljs-punctuation">(</span>seu_list<span class="hljs-punctuation">,</span> <span class="hljs-keyword">function</span><span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">)</span> <span class="hljs-punctuation">&#123;</span><br>  x <span class="hljs-operator">&lt;-</span> FindVariableFeatures<span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">,</span> nfeatures <span class="hljs-operator">=</span> <span class="hljs-number">2000</span><span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">)</span><br>features <span class="hljs-operator">&lt;-</span> SelectIntegrationFeatures<span class="hljs-punctuation">(</span>seu_list<span class="hljs-punctuation">,</span> nfeatures <span class="hljs-operator">=</span> <span class="hljs-number">2000</span><span class="hljs-punctuation">)</span><br>seu_list <span class="hljs-operator">&lt;-</span> lapply<span class="hljs-punctuation">(</span>seu_list<span class="hljs-punctuation">,</span> <span class="hljs-keyword">function</span><span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">)</span> <span class="hljs-punctuation">&#123;</span><br>  x <span class="hljs-operator">&lt;-</span> ScaleData<span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">,</span> features <span class="hljs-operator">=</span> features<span class="hljs-punctuation">)</span><br>  x <span class="hljs-operator">&lt;-</span> RunPCA<span class="hljs-punctuation">(</span>x<span class="hljs-punctuation">,</span> features <span class="hljs-operator">=</span> features<span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">)</span><br><br>anchors <span class="hljs-operator">&lt;-</span> FindIntegrationAnchors<span class="hljs-punctuation">(</span>seu_list<span class="hljs-punctuation">,</span> dims <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">,</span> reduction <span class="hljs-operator">=</span> <span class="hljs-string">&quot;rpca&quot;</span><span class="hljs-punctuation">)</span><br>seu_rpca <span class="hljs-operator">&lt;-</span> IntegrateData<span class="hljs-punctuation">(</span>anchors<span class="hljs-punctuation">,</span> dims <span class="hljs-operator">=</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 计算Silhouette Score</span><br>batch_labels <span class="hljs-operator">&lt;-</span> seu_combined<span class="hljs-operator">$</span>dataset<br><br><span class="hljs-comment"># 原始PCA</span><br>pca_coords <span class="hljs-operator">&lt;-</span> Embeddings<span class="hljs-punctuation">(</span>seu_combined<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;pca&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">]</span><br>dist_pca <span class="hljs-operator">&lt;-</span> dist<span class="hljs-punctuation">(</span>pca_coords<span class="hljs-punctuation">)</span><br>sil_pca <span class="hljs-operator">&lt;-</span> silhouette<span class="hljs-punctuation">(</span><span class="hljs-built_in">as.numeric</span><span class="hljs-punctuation">(</span>factor<span class="hljs-punctuation">(</span>batch_labels<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> dist_pca<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># Harmony</span><br>harmony_coords <span class="hljs-operator">&lt;-</span> Embeddings<span class="hljs-punctuation">(</span>seu_harmony<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;harmony&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">]</span><br>dist_harmony <span class="hljs-operator">&lt;-</span> dist<span class="hljs-punctuation">(</span>harmony_coords<span class="hljs-punctuation">)</span><br>sil_harmony <span class="hljs-operator">&lt;-</span> silhouette<span class="hljs-punctuation">(</span><span class="hljs-built_in">as.numeric</span><span class="hljs-punctuation">(</span>factor<span class="hljs-punctuation">(</span>batch_labels<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> dist_harmony<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># rPCA</span><br>rpca_coords <span class="hljs-operator">&lt;-</span> Embeddings<span class="hljs-punctuation">(</span>seu_rpca<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;integrated&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">]</span><br>dist_rpca <span class="hljs-operator">&lt;-</span> dist<span class="hljs-punctuation">(</span>rpca_coords<span class="hljs-punctuation">)</span><br>sil_rpca <span class="hljs-operator">&lt;-</span> silhouette<span class="hljs-punctuation">(</span><span class="hljs-built_in">as.numeric</span><span class="hljs-punctuation">(</span>factor<span class="hljs-punctuation">(</span>batch_labels<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> dist_rpca<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 汇总结果</span><br>results <span class="hljs-operator">&lt;-</span> data.frame<span class="hljs-punctuation">(</span><br>  Method <span class="hljs-operator">=</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;No correction&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Harmony&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rPCA&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>  Mean_Silhouette <span class="hljs-operator">=</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><br>    mean<span class="hljs-punctuation">(</span>sil_pca<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>    mean<span class="hljs-punctuation">(</span>sil_harmony<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>    mean<span class="hljs-punctuation">(</span>sil_rpca<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><br>  <span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>  Median_Silhouette <span class="hljs-operator">=</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><br>    median<span class="hljs-punctuation">(</span>sil_pca<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>    median<span class="hljs-punctuation">(</span>sil_harmony<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>    median<span class="hljs-punctuation">(</span>sil_rpca<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">)</span><br>  <span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">)</span><br><br>print<span class="hljs-punctuation">(</span>results<span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># 可视化对比</span><br>sil_combined <span class="hljs-operator">&lt;-</span> data.frame<span class="hljs-punctuation">(</span><br>  score <span class="hljs-operator">=</span> <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><br>    sil_pca<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    sil_harmony<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    sil_rpca<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>  method <span class="hljs-operator">=</span> <span class="hljs-built_in">rep</span><span class="hljs-punctuation">(</span><br>    <span class="hljs-built_in">c</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;No correction&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Harmony&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;rPCA&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span><br>    each <span class="hljs-operator">=</span> nrow<span class="hljs-punctuation">(</span>sil_pca<span class="hljs-punctuation">)</span><br>  <span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">)</span><br><br>ggplot<span class="hljs-punctuation">(</span>sil_combined<span class="hljs-punctuation">,</span> aes<span class="hljs-punctuation">(</span>x <span class="hljs-operator">=</span> method<span class="hljs-punctuation">,</span> y <span class="hljs-operator">=</span> score<span class="hljs-punctuation">,</span> fill <span class="hljs-operator">=</span> method<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  geom_violin<span class="hljs-punctuation">(</span>alpha <span class="hljs-operator">=</span> <span class="hljs-number">0.7</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  geom_boxplot<span class="hljs-punctuation">(</span>width <span class="hljs-operator">=</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> fill <span class="hljs-operator">=</span> <span class="hljs-string">&quot;white&quot;</span><span class="hljs-punctuation">,</span> outlier.shape <span class="hljs-operator">=</span> <span class="hljs-literal">NA</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  geom_hline<span class="hljs-punctuation">(</span>yintercept <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> linetype <span class="hljs-operator">=</span> <span class="hljs-string">&quot;dashed&quot;</span><span class="hljs-punctuation">,</span> color <span class="hljs-operator">=</span> <span class="hljs-string">&quot;red&quot;</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  labs<span class="hljs-punctuation">(</span><br>    title <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Comparison of Batch Correction Methods&quot;</span><span class="hljs-punctuation">,</span><br>    subtitle <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Lower silhouette score = Better batch mixing&quot;</span><span class="hljs-punctuation">,</span><br>    y <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Silhouette Score&quot;</span><span class="hljs-punctuation">,</span><br>    x <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Method&quot;</span><br>  <span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  theme_bw<span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span> <span class="hljs-operator">+</span><br>  theme<span class="hljs-punctuation">(</span>legend.position <span class="hljs-operator">=</span> <span class="hljs-string">&quot;none&quot;</span><span class="hljs-punctuation">)</span><br><br><span class="hljs-comment"># =============================================================================</span><br><span class="hljs-comment"># 下采样分析（像文章中那样）</span><br><span class="hljs-comment"># =============================================================================</span><br><br><span class="hljs-comment"># 对主要细胞类型进行20次下采样分析</span><br>calculate_silhouette_downsample <span class="hljs-operator">&lt;-</span> <span class="hljs-keyword">function</span><span class="hljs-punctuation">(</span>coords<span class="hljs-punctuation">,</span> batch_labels<span class="hljs-punctuation">,</span> downsample_ratio <span class="hljs-operator">=</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span> n_iter <span class="hljs-operator">=</span> <span class="hljs-number">20</span><span class="hljs-punctuation">)</span> <span class="hljs-punctuation">&#123;</span><br>  all_scores <span class="hljs-operator">&lt;-</span> <span class="hljs-built_in">list</span><span class="hljs-punctuation">(</span><span class="hljs-punctuation">)</span><br>  <br>  <span class="hljs-keyword">for</span> <span class="hljs-punctuation">(</span>i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span>n_iter<span class="hljs-punctuation">)</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment"># 下采样20%的细胞</span><br>    sample_idx <span class="hljs-operator">&lt;-</span> sample<span class="hljs-punctuation">(</span><span class="hljs-number">1</span><span class="hljs-operator">:</span>nrow<span class="hljs-punctuation">(</span>coords<span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> size <span class="hljs-operator">=</span> <span class="hljs-built_in">floor</span><span class="hljs-punctuation">(</span>nrow<span class="hljs-punctuation">(</span>coords<span class="hljs-punctuation">)</span> <span class="hljs-operator">*</span> downsample_ratio<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br>    coords_sub <span class="hljs-operator">&lt;-</span> coords<span class="hljs-punctuation">[</span>sample_idx<span class="hljs-punctuation">,</span> <span class="hljs-punctuation">]</span><br>    batch_sub <span class="hljs-operator">&lt;-</span> batch_labels<span class="hljs-punctuation">[</span>sample_idx<span class="hljs-punctuation">]</span><br>    <br>    <span class="hljs-comment"># 计算Silhouette Score</span><br>    dist_sub <span class="hljs-operator">&lt;-</span> dist<span class="hljs-punctuation">(</span>coords_sub<span class="hljs-punctuation">)</span><br>    sil_sub <span class="hljs-operator">&lt;-</span> silhouette<span class="hljs-punctuation">(</span><span class="hljs-built_in">as.numeric</span><span class="hljs-punctuation">(</span>factor<span class="hljs-punctuation">(</span>batch_sub<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">,</span> dist_sub<span class="hljs-punctuation">)</span><br>    all_scores<span class="hljs-punctuation">[[</span>i<span class="hljs-punctuation">]</span><span class="hljs-punctuation">]</span> <span class="hljs-operator">&lt;-</span> sil_sub<span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;sil_width&quot;</span><span class="hljs-punctuation">]</span><br>  <span class="hljs-punctuation">&#125;</span><br>  <br>  <span class="hljs-comment"># 汇总所有迭代的分数</span><br>  mean<span class="hljs-punctuation">(</span>unlist<span class="hljs-punctuation">(</span>all_scores<span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><br><span class="hljs-punctuation">&#125;</span><br><br><span class="hljs-comment"># 对CD4+ T细胞和CD8+ T细胞分别计算</span><br>cd4_cells <span class="hljs-operator">&lt;-</span> subset<span class="hljs-punctuation">(</span>seu_harmony<span class="hljs-punctuation">,</span> subset <span class="hljs-operator">=</span> celltype <span class="hljs-operator">==</span> <span class="hljs-string">&quot;CD4+ T&quot;</span><span class="hljs-punctuation">)</span><br>cd8_cells <span class="hljs-operator">&lt;-</span> subset<span class="hljs-punctuation">(</span>seu_harmony<span class="hljs-punctuation">,</span> subset <span class="hljs-operator">=</span> celltype <span class="hljs-operator">==</span> <span class="hljs-string">&quot;CD8+ T&quot;</span><span class="hljs-punctuation">)</span><br><br>cd4_harmony_coords <span class="hljs-operator">&lt;-</span> Embeddings<span class="hljs-punctuation">(</span>cd4_cells<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;harmony&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">]</span><br>cd8_harmony_coords <span class="hljs-operator">&lt;-</span> Embeddings<span class="hljs-punctuation">(</span>cd8_cells<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;harmony&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">[</span><span class="hljs-punctuation">,</span> <span class="hljs-number">1</span><span class="hljs-operator">:</span><span class="hljs-number">30</span><span class="hljs-punctuation">]</span><br><br>cd4_sil <span class="hljs-operator">&lt;-</span> calculate_silhouette_downsample<span class="hljs-punctuation">(</span><br>  cd4_harmony_coords<span class="hljs-punctuation">,</span> <br>  cd4_cells<span class="hljs-operator">$</span>dataset<span class="hljs-punctuation">,</span><br>  downsample_ratio <span class="hljs-operator">=</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span><br>  n_iter <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br><span class="hljs-punctuation">)</span><br><br>cd8_sil <span class="hljs-operator">&lt;-</span> calculate_silhouette_downsample<span class="hljs-punctuation">(</span><br>  cd8_harmony_coords<span class="hljs-punctuation">,</span> <br>  cd8_cells<span class="hljs-operator">$</span>dataset<span class="hljs-punctuation">,</span><br>  downsample_ratio <span class="hljs-operator">=</span> <span class="hljs-number">0.2</span><span class="hljs-punctuation">,</span><br>  n_iter <span class="hljs-operator">=</span> <span class="hljs-number">20</span><br><span class="hljs-punctuation">)</span><br><br>cat<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;CD4+ T cells Silhouette Score:&quot;</span><span class="hljs-punctuation">,</span> cd4_sil<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;\n&quot;</span><span class="hljs-punctuation">)</span><br>cat<span class="hljs-punctuation">(</span><span class="hljs-string">&quot;CD8+ T cells Silhouette Score:&quot;</span><span class="hljs-punctuation">,</span> cd8_sil<span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;\n&quot;</span><span class="hljs-punctuation">)</span><br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/" class="category-chain-item">科研学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/%E5%8D%95%E7%BB%86%E8%83%9E%E5%88%86%E6%9E%90/" class="category-chain-item">单细胞分析</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%8D%95%E7%BB%86%E8%83%9E/">#单细胞</a>
+      
+        <a href="/tags/%E6%89%B9%E6%AC%A1%E6%95%88%E5%BA%94/">#批次效应</a>
+      
+        <a href="/tags/Seurat/">#Seurat</a>
+      
+        <a href="/tags/%E6%B3%9B%E7%99%8C/">#泛癌</a>
+      
+        <a href="/tags/Harmony/">#Harmony</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>[批次效应评估] 泛癌多样本来源的数据</div>
+      <div>http://example.com/2026/09/13/【批次效应评估】泛癌多样本来源的数据/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 13, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/09/13/%E3%80%90python%E4%B8%8ER%E8%BD%AC%E6%8D%A2%E3%80%91scanpy%20h5ad%E4%B8%8Eseurat%20rds%E8%BD%AC%E6%8D%A2%E5%B7%A5%E5%85%B7/" title="[Python与R转换] Scanpy h5ad与Seurat rds转换工具">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">[Python与R转换] Scanpy h5ad与Seurat rds转换工具</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/09/13/%E3%80%90%E5%8D%95%E7%BB%86%E8%83%9E%E5%8E%BB%E6%89%B9%E6%AC%A1%E3%80%91%20SCVI-tools/" title="[单细胞去批次] scVI-tools">
+                        <span class="hidden-mobile">[单细胞去批次] scVI-tools</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
