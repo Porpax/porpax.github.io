@@ -1,0 +1,846 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.png">
+  <link rel="icon" href="/img/myicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zihan Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="随手记录网页浏览中的灵感、评分与标签，回顾浏览时长和历史笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器插件：浏览便签">
+<meta property="og:url" content="https://www.porpaxcc.com/2026/10/07/%E6%B5%8F%E8%A7%88%E4%BE%BF%E7%AD%BE%E6%8F%92%E4%BB%B6/index.html">
+<meta property="og:site_name" content="Porpax Chen&#39;s Blog">
+<meta property="og:description" content="随手记录网页浏览中的灵感、评分与标签，回顾浏览时长和历史笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791309374139-acfaded2-a6b7-404f-93cd-df597301d864.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286004546-178906cf-837b-40d1-9914-ff0f716d2252.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286048868-4ffee1c8-9a4c-45d7-ad3d-33913355c0fb.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286350285-02584dbe-2740-4120-a1b8-e6904d2f7d6d.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286396405-8660c44e-7dee-4a8f-b504-a933cbc716b7.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287829147-098dd029-a64e-401d-86f1-b43207e1c255.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287874961-a51b3e9e-686e-48a9-a3e6-d443df955b24.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791288009362-cc2b5836-3cf1-4406-9d4a-70d145fdce90.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286605501-c86b3b83-860e-4b66-810d-7c639a17cb2a.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289800742-672eab9a-cfa6-4e43-8016-d2f9c98444f0.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791288294845-e65a013f-900c-42df-a990-95aaf07bfcda.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289173838-0e4eb48e-9072-43ff-bc53-9217b6aa3232.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289312985-2031d203-7f55-425b-85ad-d45dbe0aaf57.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286994089-e9e91ca6-1a7c-4693-9183-a1b6a43debdb.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287080990-8e4e4e4a-c53a-454b-84bd-0fb7e7d36c1b.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287098402-a4d3f957-787d-4f68-8f6a-d4657471116f.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287125691-88ae8279-9326-45a2-aefc-f2cc7a7f19c0.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287316918-2c88c5c1-07ad-4240-ba1f-f345cfc28266.png">
+<meta property="article:published_time" content="2026-10-07T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-10-06T18:29:56.116Z">
+<meta property="article:author" content="Zihan Chen">
+<meta property="article:tag" content="浏览器插件">
+<meta property="article:tag" content="Chrome">
+<meta property="article:tag" content="Edge">
+<meta property="article:tag" content="效率工具">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791309374139-acfaded2-a6b7-404f-93cd-df597301d864.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>浏览器插件：浏览便签 - Porpax Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"www.porpaxcc.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Porpax&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/seacloud.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="浏览器插件：浏览便签"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-10-07 10:00" pubdate>
+          October 7, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          763 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">浏览器插件：浏览便签</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on October 7, 2026 am
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="浏览器插件：浏览便签"><a href="#浏览器插件：浏览便签" class="headerlink" title="浏览器插件：浏览便签"></a>浏览器插件：浏览便签</h1><p>Chrome 浏览器插件：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2026/zip/34815153/1791201679142-428b0ec8-3825-44f7-a8b2-2699baa93388.zip">browsing-notes-0.3.3.zip</a></p>
+<p>Edge 浏览器插件：<a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2026/zip/34815153/1791215630221-0128d0a3-90e1-4f73-bac1-cb02520a1b7d.zip">browsing-notes-edge-0.3.3.zip</a></p>
+<blockquote>
+<p>安装包仍托管于语雀，下载时可能需要登录语雀账号。</p>
+</blockquote>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791309374139-acfaded2-a6b7-404f-93cd-df597301d864.png" srcset="/img/loading.gif" lazyload></p>
+<p>做了一个浏览器小插件：浏览便签，可以随手记录网页浏览中的灵感。点开悬浮小球，就能写想法、打分、加标签，同步记录浏览时长，方便每天或每周回顾。ADHD好帮手 : )</p>
+<h2 id="Edge-插件安装"><a href="#Edge-插件安装" class="headerlink" title="Edge 插件安装"></a>Edge 插件安装</h2><ol>
+<li>保存插件到本地并解压缩</li>
+<li>浏览器地址栏输入 edge:&#x2F;&#x2F;extensions&#x2F;</li>
+<li>打开界面左下角的“开发人员模式”</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286004546-178906cf-837b-40d1-9914-ff0f716d2252.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+4. 点击“加载解压缩的扩展”，选择已解压的文件 browsing-notes-edge-0.3.3
+
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286048868-4ffee1c8-9a4c-45d7-ad3d-33913355c0fb.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;" />
+
+<ol start="5">
+<li>安装成功</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286350285-02584dbe-2740-4120-a1b8-e6904d2f7d6d.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<p>可在扩展栏中将其固定</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286396405-8660c44e-7dee-4a8f-b504-a933cbc716b7.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<h2 id="Chrome-插件安装"><a href="#Chrome-插件安装" class="headerlink" title="Chrome 插件安装"></a>Chrome 插件安装</h2><ol>
+<li>保存插件到本地并解压缩</li>
+<li>浏览器地址栏输入 chrome:&#x2F;&#x2F;extensions&#x2F;</li>
+<li>打开界面右上角的“开发者模式”</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287829147-098dd029-a64e-401d-86f1-b43207e1c255.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+4. 点击“加载未打包的扩展程序”，选择已解压的文件夹 browsing-notes-0.3.3
+
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287874961-a51b3e9e-686e-48a9-a3e6-d443df955b24.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<ol start="5">
+<li>安装成功</li>
+</ol>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791288009362-cc2b5836-3cf1-4406-9d4a-70d145fdce90.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><h3 id="选择是否记录站点"><a href="#选择是否记录站点" class="headerlink" title="选择是否记录站点"></a>选择是否记录站点</h3><p>插件安装完毕，需要点开新的网页后，屏幕右下角才会出现浏览便签的悬浮球，小蓝点表示首次记录该站点；点击打开便签界面，选择记录方式</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286605501-c86b3b83-860e-4b66-810d-7c639a17cb2a.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<h3 id="开始记录"><a href="#开始记录" class="headerlink" title="开始记录"></a>开始记录</h3><p>点击悬浮球即可记录当前想法，评分或标记</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289800742-672eab9a-cfa6-4e43-8016-d2f9c98444f0.png" srcset="/img/loading.gif" lazyload style="zoom:33%;" />
+
+<h3 id="退出便签插件"><a href="#退出便签插件" class="headerlink" title="退出便签插件"></a>退出便签插件</h3><p>便签页面拖到底可以选择关闭悬浮球，意味着退出便签插件，停止所有记录</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791288294845-e65a013f-900c-42df-a990-95aaf07bfcda.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<h3 id="打开侧边栏"><a href="#打开侧边栏" class="headerlink" title="打开侧边栏"></a>打开侧边栏</h3><p>点击便签页面的斜箭头可打开侧边栏</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289173838-0e4eb48e-9072-43ff-bc53-9217b6aa3232.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" />
+
+<p>侧边栏可以留下更多笔记，从这里还可进入“历史记录”页面</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289312985-2031d203-7f55-425b-85ad-d45dbe0aaf57.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" />
+
+<h2 id="历史记录页"><a href="#历史记录页" class="headerlink" title="历史记录页"></a>历史记录页</h2><!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286994089-e9e91ca6-1a7c-4693-9183-a1b6a43debdb.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+<p>历史记录页可统计今日使用站点时长，浏览最久的帖子和笔记汇总；还可根据评分找到已标记的站点</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287080990-8e4e4e4a-c53a-454b-84bd-0fb7e7d36c1b.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;" />
+
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287098402-a4d3f957-787d-4f68-8f6a-d4657471116f.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287125691-88ae8279-9326-45a2-aefc-f2cc7a7f19c0.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" />
+
+<h2 id="设置与主题页"><a href="#设置与主题页" class="headerlink" title="设置与主题页"></a>设置与主题页</h2><p>“历史记录”页右上角可以切换到“设置与主题”</p>
+<p>可以更改整体样式，悬浮球动效，浏览计时方式，增加常用标签和笔记备份与下载等</p>
+<p>选择喜欢的样式吧！</p>
+<!-- 这是一张图片，ocr 内容为： -->
+<img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287316918-2c88c5c1-07ad-4240-ba1f-f345cfc28266.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" />
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/" class="category-chain-item">科研学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/%E5%B7%A5%E5%85%B7%E7%AE%B1/" class="category-chain-item">工具箱</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/">#浏览器插件</a>
+      
+        <a href="/tags/Chrome/">#Chrome</a>
+      
+        <a href="/tags/Edge/">#Edge</a>
+      
+        <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/">#效率工具</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>浏览器插件：浏览便签</div>
+      <div>https://www.porpaxcc.com/2026/10/07/浏览便签插件/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 7, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/09/13/Milo%20%E7%BB%86%E8%83%9E%E4%B8%B0%E5%BA%A6%E7%AE%97%E6%B3%95/" title="Milo细胞丰度算法">
+                        <span class="hidden-mobile">Milo细胞丰度算法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Porpax/porpax.github.io","repo-id":"R_kgDOJjghPw","category":"Announcements","category-id":"DIC_kwDOJjghP84DFdgI","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/blog-translate.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

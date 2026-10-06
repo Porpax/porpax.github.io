@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>浏览器插件：浏览便签</title>
+    <link href="/2026/10/07/%E6%B5%8F%E8%A7%88%E4%BE%BF%E7%AD%BE%E6%8F%92%E4%BB%B6/"/>
+    <url>/2026/10/07/%E6%B5%8F%E8%A7%88%E4%BE%BF%E7%AD%BE%E6%8F%92%E4%BB%B6/</url>
+    
+    <content type="html"><![CDATA[<h1 id="浏览器插件：浏览便签"><a href="#浏览器插件：浏览便签" class="headerlink" title="浏览器插件：浏览便签"></a>浏览器插件：浏览便签</h1><p>Chrome 浏览器插件：<a href="https://www.yuque.com/attachments/yuque/0/2026/zip/34815153/1791201679142-428b0ec8-3825-44f7-a8b2-2699baa93388.zip">browsing-notes-0.3.3.zip</a></p><p>Edge 浏览器插件：<a href="https://www.yuque.com/attachments/yuque/0/2026/zip/34815153/1791215630221-0128d0a3-90e1-4f73-bac1-cb02520a1b7d.zip">browsing-notes-edge-0.3.3.zip</a></p><blockquote><p>安装包仍托管于语雀，下载时可能需要登录语雀账号。</p></blockquote><!-- 这是一张图片，ocr 内容为： --><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791309374139-acfaded2-a6b7-404f-93cd-df597301d864.png"></p><p>做了一个浏览器小插件：浏览便签，可以随手记录网页浏览中的灵感。点开悬浮小球，就能写想法、打分、加标签，同步记录浏览时长，方便每天或每周回顾。ADHD好帮手 : )</p><h2 id="Edge-插件安装"><a href="#Edge-插件安装" class="headerlink" title="Edge 插件安装"></a>Edge 插件安装</h2><ol><li>保存插件到本地并解压缩</li><li>浏览器地址栏输入 edge:&#x2F;&#x2F;extensions&#x2F;</li><li>打开界面左下角的“开发人员模式”</li></ol><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286004546-178906cf-837b-40d1-9914-ff0f716d2252.png" style="zoom:50%;" />4. 点击“加载解压缩的扩展”，选择已解压的文件 browsing-notes-edge-0.3.3<!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286048868-4ffee1c8-9a4c-45d7-ad3d-33913355c0fb.png" style="zoom: 25%;" /><ol start="5"><li>安装成功</li></ol><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286350285-02584dbe-2740-4120-a1b8-e6904d2f7d6d.png" style="zoom: 33%;" /><p>可在扩展栏中将其固定</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286396405-8660c44e-7dee-4a8f-b504-a933cbc716b7.png" style="zoom: 33%;" /><h2 id="Chrome-插件安装"><a href="#Chrome-插件安装" class="headerlink" title="Chrome 插件安装"></a>Chrome 插件安装</h2><ol><li>保存插件到本地并解压缩</li><li>浏览器地址栏输入 chrome:&#x2F;&#x2F;extensions&#x2F;</li><li>打开界面右上角的“开发者模式”</li></ol><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287829147-098dd029-a64e-401d-86f1-b43207e1c255.png" style="zoom:33%;" />4. 点击“加载未打包的扩展程序”，选择已解压的文件夹 browsing-notes-0.3.3<!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287874961-a51b3e9e-686e-48a9-a3e6-d443df955b24.png" style="zoom:50%;" /><ol start="5"><li>安装成功</li></ol><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791288009362-cc2b5836-3cf1-4406-9d4a-70d145fdce90.png" style="zoom:50%;" /><h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><h3 id="选择是否记录站点"><a href="#选择是否记录站点" class="headerlink" title="选择是否记录站点"></a>选择是否记录站点</h3><p>插件安装完毕，需要点开新的网页后，屏幕右下角才会出现浏览便签的悬浮球，小蓝点表示首次记录该站点；点击打开便签界面，选择记录方式</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286605501-c86b3b83-860e-4b66-810d-7c639a17cb2a.png" style="zoom: 33%;" /><h3 id="开始记录"><a href="#开始记录" class="headerlink" title="开始记录"></a>开始记录</h3><p>点击悬浮球即可记录当前想法，评分或标记</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289800742-672eab9a-cfa6-4e43-8016-d2f9c98444f0.png" style="zoom:33%;" /><h3 id="退出便签插件"><a href="#退出便签插件" class="headerlink" title="退出便签插件"></a>退出便签插件</h3><p>便签页面拖到底可以选择关闭悬浮球，意味着退出便签插件，停止所有记录</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791288294845-e65a013f-900c-42df-a990-95aaf07bfcda.png" style="zoom: 33%;" /><h3 id="打开侧边栏"><a href="#打开侧边栏" class="headerlink" title="打开侧边栏"></a>打开侧边栏</h3><p>点击便签页面的斜箭头可打开侧边栏</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289173838-0e4eb48e-9072-43ff-bc53-9217b6aa3232.png" style="zoom: 33%;" /><p>侧边栏可以留下更多笔记，从这里还可进入“历史记录”页面</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791289312985-2031d203-7f55-425b-85ad-d45dbe0aaf57.png" style="zoom: 50%;" /><h2 id="历史记录页"><a href="#历史记录页" class="headerlink" title="历史记录页"></a>历史记录页</h2><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791286994089-e9e91ca6-1a7c-4693-9183-a1b6a43debdb.png" style="zoom:50%;" /><p>历史记录页可统计今日使用站点时长，浏览最久的帖子和笔记汇总；还可根据评分找到已标记的站点</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287080990-8e4e4e4a-c53a-454b-84bd-0fb7e7d36c1b.png" style="zoom: 25%;" /><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287098402-a4d3f957-787d-4f68-8f6a-d4657471116f.png" style="zoom:25%;" /><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287125691-88ae8279-9326-45a2-aefc-f2cc7a7f19c0.png" style="zoom:25%;" /><h2 id="设置与主题页"><a href="#设置与主题页" class="headerlink" title="设置与主题页"></a>设置与主题页</h2><p>“历史记录”页右上角可以切换到“设置与主题”</p><p>可以更改整体样式，悬浮球动效，浏览计时方式，增加常用标签和笔记备份与下载等</p><p>选择喜欢的样式吧！</p><!-- 这是一张图片，ocr 内容为： --><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/2026-10-browsing-notes/1791287316918-2c88c5c1-07ad-4240-ba1f-f345cfc28266.png" style="zoom:50%;" />]]></content>
+    
+    
+    <categories>
+      
+      <category>科研学习</category>
+      
+      <category>工具箱</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>浏览器插件</tag>
+      
+      <tag>Chrome</tag>
+      
+      <tag>Edge</tag>
+      
+      <tag>效率工具</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Milo细胞丰度算法</title>
     <link href="/2026/09/13/Milo%20%E7%BB%86%E8%83%9E%E4%B8%B0%E5%BA%A6%E7%AE%97%E6%B3%95/"/>
     <url>/2026/09/13/Milo%20%E7%BB%86%E8%83%9E%E4%B8%B0%E5%BA%A6%E7%AE%97%E6%B3%95/</url>
@@ -158,9 +191,9 @@
       
       <tag>单细胞</tag>
       
-      <tag>Seurat</tag>
-      
       <tag>批次效应</tag>
+      
+      <tag>Seurat</tag>
       
       <tag>泛癌</tag>
       
@@ -321,9 +354,40 @@
       
       <tag>车展</tag>
       
+      <tag>新能源汽车</tag>
+      
       <tag>跑车</tag>
       
-      <tag>新能源汽车</tag>
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Zotero 到 EndNote 参考文献转换</title>
+    <link href="/2025/01/05/Zotero%E5%88%B0Endnote%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E8%BD%AC%E6%8D%A2/"/>
+    <url>/2025/01/05/Zotero%E5%88%B0Endnote%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E8%BD%AC%E6%8D%A2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Zotero-到-EndNote-参考文献转换"><a href="#Zotero-到-EndNote-参考文献转换" class="headerlink" title="Zotero 到 EndNote 参考文献转换"></a>Zotero 到 EndNote 参考文献转换</h1><p>上标替换：<a href="https://baijiahao.baidu.com/s?id=1687564621839055421">https://baijiahao.baidu.com/s?id=1687564621839055421</a></p><p>找英文替换词，近义词：<a href="https://www.thesaurus.com/browse/important">https://www.thesaurus.com/browse/important</a></p><p>查重：<a href="https://www.ithenticate.com/">https://www.ithenticate.com/</a></p><p>寻找参考文献样式：<a href="https://editor.citationstyles.org/about/">https://editor.citationstyles.org/about/</a></p><p>深大Endnote下载地址：<a href="https://www.lib.szu.edu.cn/er/endnote">https://www.lib.szu.edu.cn/er/endnote</a></p><h2 id="EndNote-使用背景"><a href="#EndNote-使用背景" class="headerlink" title="EndNote 使用背景"></a>EndNote 使用背景</h2><p>.csl 是zotero使用的参考文献格式，.ens 是Endnote的私有格式</p><p>有时我们遇到投稿网站要求指定的参考文献格式，它通常会给出.csl&#x2F;.ens文件;将其导入文献管理工具就可以轻松使用</p><p>但是csl和 ens 格式不能相互转换，如果恰巧使用的是zotero但只有.ens文件；那么就需要重做csl文件或者将zotero文献导入endnote了。</p><h2 id="CSL-与-ENS-格式转换的限制"><a href="#CSL-与-ENS-格式转换的限制" class="headerlink" title="CSL 与 ENS 格式转换的限制"></a>CSL 与 ENS 格式转换的限制</h2><p>在zotero的讨论栏也有类似的需求，但有回复说二者不能相互转换：<a href="https://forums.zotero.org/discussion/81713/endnote-to-csl-migration">https://forums.zotero.org/discussion/81713/endnote-to-csl-migration</a></p><p>Zotero早期可以识别<a href="https://zhida.zhihu.com/search?content_id=226868517&content_type=Article&match_order=1&q=ens&zhida_source=entity">ens</a>的格式文件（Endnote的私有格式）并将其转化为csl（开源协议的格式文件），但是被endnote母公司起诉，所以开发者最终没有保留这个功能（这也是forums评论提到的But there was a (frivolous in my view) lawsuit over that, so zotero devs removed it.）</p><p>于是直接转换的方式行不通，只能用别的方式了</p><h2 id="方案一：制作或修改-CSL-文件"><a href="#方案一：制作或修改-CSL-文件" class="headerlink" title="方案一：制作或修改 CSL 文件"></a>方案一：制作或修改 CSL 文件</h2><p><a href="https://www.zotero.org/support/dev/citation_styles/style_editing_step-by-step">https://www.zotero.org/support/dev/citation_styles&#x2F;style_editing_step-by-step</a></p><p>visual citation style language editor 目前官网打不开，主要是编辑非常繁琐：<a href="https://blog.csdn.net/m0_51706097/article/details/141461391">https://blog.csdn.net/m0_51706097&#x2F;article&#x2F;details&#x2F;141461391</a></p><p>所以最终选择了方案2</p><h2 id="方案二：从-Zotero-迁移到-EndNote"><a href="#方案二：从-Zotero-迁移到-EndNote" class="headerlink" title="方案二：从 Zotero 迁移到 EndNote"></a>方案二：从 Zotero 迁移到 EndNote</h2><h3 id="从-Zotero-导出"><a href="#从-Zotero-导出" class="headerlink" title="从 Zotero 导出"></a>从 Zotero 导出</h3><p>ctrl+A 全选或选择需要的文献</p><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735785321179-37761cff-e7db-4445-afb2-c818b607601a.png"></p><p>在zotero左上角栏选择 文件-导出PDFs</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735785364563-2afba37c-c690-4d1e-8e3e-f452124751a3.png" style="zoom:33%;" /><p>将文件整理到文件夹下，每个文件夹下是pdf文章文件</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735796920329-e3838479-5dc5-4877-92bd-3fb18eaa76ef.png" style="zoom:33%;" /><h3 id="导入-EndNote-文献库"><a href="#导入-EndNote-文献库" class="headerlink" title="导入 EndNote 文献库"></a>导入 EndNote 文献库</h3><ol><li>首先新建分组集合</li></ol><p>新建分组集合：右键点击 MY GROUP - Creat Group Set ；Group Set下方可以有许多小的分组</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735787029793-17c1cbf7-1f4b-4818-be34-ae2756cdb6e7.png" style="zoom: 50%;" /><p>新建好的集合</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735797032689-5eaf53e9-e8e0-48a1-9211-d3fbc6295b98.png" style="zoom:50%;" /><ol start="2"><li>文件归档，先将文件添加到 Imported References（File-Import-Folder）</li></ol><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735797670163-0d9fbdd7-1b09-418f-b9dc-1974e7d1a19f.png" style="zoom:50%;" /><ol start="3"><li>再将 Imported References内的文件添加到集合, 选中 Imported References 内的文献，右键添加到对应的集合</li></ol><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735797785532-8acf0d21-0b97-44d1-8a0d-65389be94d06.png" style="zoom:50%;" /><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735797600302-16baba37-e6de-472a-a23c-b2d44e1f2de8.png" style="zoom:50%;" /><h3 id="批量导入-RIS-文件"><a href="#批量导入-RIS-文件" class="headerlink" title="批量导入 RIS 文件"></a>批量导入 RIS 文件</h3><p><a href="https://blog.csdn.net/qq_43447188/article/details/134141492?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-1-134141492-blog-128889433.235%5Ev43%5Epc_blog_bottom_relevance_base2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2~default~BlogCommendFromBaidu~Ctr-1-134141492-blog-128889433.235%5Ev43%5Epc_blog_bottom_relevance_base2&utm_relevant_index=2">EndNote批量导入ris文件方法-CSDN博客</a></p><p>在包含有多个ris文件的文件夹下，新建txt文档，输入下方文字，并另存为bat文件；bat文件和ris文件放在一起</p><figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bat">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-built_in">copy</span> *.enw all_input.enw<br><span class="hljs-built_in">copy</span> *.ris all_input.ris<br>all_input.enw<br>all_input.ris<br><span class="hljs-built_in">pause</span><br><span class="hljs-built_in">del</span> all_input.enw<br><span class="hljs-built_in">del</span> all_input.ris<br></code></pre></td></tr></table></figure><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735806740723-843ebe06-fc0c-438e-b705-1c43c5f0a2ad.png" style="zoom:50%;" /><h2 id="使用-ENS-文件设置-EndNote-引用格式"><a href="#使用-ENS-文件设置-EndNote-引用格式" class="headerlink" title="使用 ENS 文件设置 EndNote 引用格式"></a>使用 ENS 文件设置 EndNote 引用格式</h2><p>如果直接有对应的格式，就不用这一步</p><p>首先获取到所需参考文献格式的ens文件, 将其另存为endnote文件路径 Style文件夹下</p><p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735800047272-23e26661-e4e3-4278-aae4-f5e0b49af02e.png"></p><p>打开word-Endnote栏-Style-Select another stytle, 在弹出的提示框中选择所需的参考文件样式</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735800212527-ff205e3f-7a97-4c40-8353-536148e1243f.png" style="zoom:50%;" /><h2 id="插入参考文献"><a href="#插入参考文献" class="headerlink" title="插入参考文献"></a>插入参考文献</h2><p>光标定位到文字后，word-EndNote20 -Go to EndNote， 在 EndNote里点击所需文献，再回到Word-Insert Citation - Insert Selected Citation</p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1735800912391-ec1065a6-a7c7-42cf-85b6-5e08fb25a2c7.png" style="zoom:50%;" /><h2 id="引用书籍"><a href="#引用书籍" class="headerlink" title="引用书籍"></a>引用书籍</h2><p><a href="https://blog.csdn.net/Nisotope/article/details/129308679">https://blog.csdn.net/Nisotope/article/details/129308679</a></p><p><font style="color:rgb(77, 77, 77);">输入这个网址</font>查找书籍，需要挂梯子：<font style="color:rgb(77, 77, 77);"><a href="https://www.semanticscholar.org/">https://www.semanticscholar.org/</a>  </font></p><h2 id="更新参考文献"><a href="#更新参考文献" class="headerlink" title="更新参考文献"></a>更新参考文献</h2><p><font style="color:rgb(77, 77, 77);">word导航栏 -Endnote20 -Turn Instant Formatting</font></p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/1736153406578-46accfff-9d29-4d9b-be9c-170db20ca4f8.png" style="zoom:50%;" />]]></content>
+    
+    
+    <categories>
+      
+      <category>科研学习</category>
+      
+      <category>工具箱</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Zotero</tag>
+      
+      <tag>EndNote</tag>
+      
+      <tag>参考文献</tag>
       
     </tags>
     
@@ -636,9 +700,9 @@
       
       <tag>装机</tag>
       
-      <tag>工作站主板</tag>
-      
       <tag>问题解决</tag>
+      
+      <tag>工作站主板</tag>
       
       <tag>内存</tag>
       
@@ -667,13 +731,13 @@
       
       <tag>装机</tag>
       
+      <tag>工作站主板</tag>
+      
       <tag>服务器</tag>
       
       <tag>电子产品</tag>
       
       <tag>DIY 配置</tag>
-      
-      <tag>工作站主板</tag>
       
     </tags>
     
@@ -762,9 +826,9 @@
       
       <tag>车展</tag>
       
-      <tag>跑车</tag>
-      
       <tag>新能源汽车</tag>
+      
+      <tag>跑车</tag>
       
     </tags>
     
