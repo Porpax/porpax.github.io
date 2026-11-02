@@ -1,0 +1,812 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/myicon.png">
+  <link rel="icon" href="/img/myicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zihan Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="解读肝癌瘤内蜡样芽孢杆菌研究，以及利用 Visium 数据中的未比对 reads 分析空间微生物信息的方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cancer Cell 2026｜Visium 空间转录组如何检测非靶标瘤内菌">
+<meta property="og:url" content="https://www.porpaxcc.com/2026/11/02/Cancer%20cell%202026_%20visium%E7%A9%BA%E8%BD%AC%E6%8A%80%E6%9C%AF%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E9%9D%9E%E9%9D%B6%E6%A0%87%E7%98%A4%E5%86%85%E8%8F%8C/index.html">
+<meta property="og:site_name" content="Porpax Chen&#39;s Blog">
+<meta property="og:description" content="解读肝癌瘤内蜡样芽孢杆菌研究，以及利用 Visium 数据中的未比对 reads 分析空间微生物信息的方法">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563107093-83e2f4fa-3942-4166-8e39-3a0d7ddbda5e.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563126122-32b3483b-ecd0-4773-8286-48ae68296a69.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563350426-d7d7d518-1040-45fb-a6c8-996bb8ab3b86.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563340064-f8dd28f3-0d1e-41eb-bf03-b94ab7be2bcd.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563410360-b41bbff1-ae31-4b5a-b3c3-f44a8927cc11.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563463115-9286ab33-8ef0-4223-b427-01792c54642a.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563484097-5717674e-2ed0-4e56-9b24-db42379ecabf.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563526659-7992c520-86e5-45ff-8d48-3c1796553634.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563584724-62479e62-2ce5-4420-9474-772786834c01.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563599949-27b74202-3328-49fa-b31d-b674e244328f.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563612418-730448f7-00f5-4521-ae7a-3da82a5beebb.png">
+<meta property="og:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563628281-53bfd8e3-c4e5-4bf3-b010-7acdfdc4837d.png">
+<meta property="article:published_time" content="2026-11-02T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-11-02T14:48:22.663Z">
+<meta property="article:author" content="Zihan Chen">
+<meta property="article:tag" content="Cancer Cell">
+<meta property="article:tag" content="Visium">
+<meta property="article:tag" content="空间转录组">
+<meta property="article:tag" content="瘤内菌">
+<meta property="article:tag" content="SMT">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563107093-83e2f4fa-3942-4166-8e39-3a0d7ddbda5e.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Cancer Cell 2026｜Visium 空间转录组如何检测非靶标瘤内菌 - Porpax Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/blog-enhancements.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"www.porpaxcc.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":50,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Porpax&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/seacloud.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Cancer Cell 2026｜Visium 空间转录组如何检测非靶标瘤内菌"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-11-02 10:00" pubdate>
+          November 2, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Cancer Cell 2026｜Visium 空间转录组如何检测非靶标瘤内菌</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    Last updated on November 2, 2026 pm
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Cancer-Cell-2026｜Visium-空间转录组如何检测非靶标瘤内菌"><a href="#Cancer-Cell-2026｜Visium-空间转录组如何检测非靶标瘤内菌" class="headerlink" title="Cancer Cell 2026｜Visium 空间转录组如何检测非靶标瘤内菌"></a>Cancer Cell 2026｜Visium 空间转录组如何检测非靶标瘤内菌</h1><p><font style="color:rgba(0, 0, 0, 0.9);">今天研读的是2026年Cancer cell文章”Intratumoral Bacillus cereus orchestrates stem-like lymphoidniches to potentiate immunotherapy response in hepatocellular carcinoma”</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563107093-83e2f4fa-3942-4166-8e39-3a0d7ddbda5e.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><p><font style="color:rgb(214, 168, 65);">Bacillus cereus蜡样芽孢杆菌，革兰氏阳性菌，β溶血性的杆状细菌。部分菌株会产生肠毒素，使其被作为典型的食源性致病菌；</font><font style="color:rgba(0, 0, 0, 0.9);">但是这篇文章发现，肿瘤内蜡样芽孢杆菌可通过 PI-PLC 诱导内皮细胞释放 IL-33，驱动 CD70⁺ ILC2 与 TCF1⁺ Tpex 细胞组成的「干性样淋巴生态位」积累，从而增强 PD-1&#x2F;PD-L1 免疫治疗反应。</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563126122-32b3483b-ecd0-4773-8286-48ae68296a69.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong><font style="color:rgba(0, 0, 0, 0.9);">「同样是拥有三级淋巴结构（</font><strong><strong><font style="color:rgba(0, 0, 0, 0.9);">TLS</font></strong></strong><font style="color:rgba(0, 0, 0, 0.9);">）的肝细胞癌，对</font><strong><strong><font style="color:rgba(0, 0, 0, 0.9);">PD-1&#x2F;PD-L1</font></strong></strong><font style="color:rgba(0, 0, 0, 0.9);">免疫治疗的反应为什么会不同呢？」</font></strong></p>
+<p><font style="color:rgba(0, 0, 0, 0.9);">研究人员通过mIF分析发现，单纯的 TLS 丰度并不能稳定预测</font><font style="color:rgba(0, 0, 0, 0.9);">免疫治疗反应</font><font style="color:rgba(0, 0, 0, 0.9);">。</font><font style="color:rgba(0, 0, 0, 0.9);">且</font><font style="color:rgba(0, 0, 0, 0.9);">TLS 中存在大量 </font><font style="color:rgba(0, 0, 0, 0.9);">TCF1⁺ Tpex 细胞</font><font style="color:rgba(0, 0, 0, 0.9);">，而这些区域同时富集一种特殊的 </font><font style="color:rgba(0, 0, 0, 0.9);">CD70⁺ ILC2</font><font style="color:rgba(0, 0, 0, 0.9);">。</font>  </p>
+<p><font style="color:rgba(0, 0, 0, 0.9);">文章</font><font style="color:rgba(0, 0, 0, 0.9);">首先通过多重免疫荧光、空间转录组、成像质谱流式等空间组学技术，从肝癌组织中识别出一个与免疫治疗反应相关的</font><font style="color:rgb(171, 25, 66);">stem-like lymphoid niche</font><font style="color:rgba(0, 0, 0, 0.9);">，即由 </font><font style="color:rgba(0, 0, 0, 0.9);">CD70⁺ ILC2 和 TCF1⁺ Tpex</font><font style="color:rgba(0, 0, 0, 0.9);"> 等细胞组成的特定空间生态位。随后，作者进一步利用空间转录组中的微生物信息，结合 SMTa 分析发现 </font><em><strong><font style="color:rgb(214, 168, 65);">Bacillus</font></strong>__<strong><font style="color:rgb(0, 128, 255);"> </font></strong></em><font style="color:rgba(0, 0, 0, 0.9);">在这些 niche 周围富集，并通过后续</font><font style="color:rgba(0, 0, 0, 0.9);">小鼠和体外</font><font style="color:rgba(0, 0, 0, 0.9);">实验进一步将其锁定为</font><em><strong><font style="color:rgb(214, 168, 65);">B. cereus</font></strong></em><font style="color:rgba(0, 0, 0, 0.9);">并研究其作用机制。</font></p>
+<p><strong><font style="color:rgba(0, 0, 0, 0.9);">（文章思路见文末）</font></strong></p>
+<p><font style="color:rgb(122, 79, 214);">很扎实的研究，文章花开两朵，各表一枝；</font></p>
+<p><font style="color:rgb(122, 79, 214);">•</font><font style="color:rgb(122, 79, 214);">干湿实验结合，</font><font style="color:rgb(122, 79, 214);">空间组学</font><font style="color:rgb(122, 79, 214);">发现问题</font><font style="color:rgb(122, 79, 214);">，机制实验解释因果</font></p>
+<p><font style="color:rgb(122, 79, 214);">•visium 数据一部分做免疫细胞的分析，另一部分做胞内菌的分析</font></p>
+<h2 id="Visium-如何检测非靶标瘤内菌"><a href="#Visium-如何检测非靶标瘤内菌" class="headerlink" title="Visium 如何检测非靶标瘤内菌"></a>Visium 如何检测非靶标瘤内菌</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563350426-d7d7d518-1040-45fb-a6c8-996bb8ab3b86.png" srcset="/img/loading.gif" lazyload></p>
+<p><em><font style="color:rgb(136, 136, 136);">(B) Spatial distribution of TLS, ILC2 score, CD70 and </font><strong><font style="color:rgb(136, 136, 136);">Bacillus</font></strong><font style="color:rgb(136, 136, 136);">in the transcriptome of HCC tissues. </font><strong><font style="color:rgb(136, 136, 136);">图fig.S4 B </font></strong><font style="color:rgb(136, 136, 136);">作者使用visium技术计算了组织中的</font><strong><font style="color:rgb(136, 136, 136);">Bacillus</font></strong><font style="color:rgb(136, 136, 136);">丰度</font></em></p>
+<p>回到我们最关心的问题，visium技术如何检测到_<font style="color:rgba(0, 0, 0, 0.9);">Bacillus </font>_<font style="color:rgba(0, 0, 0, 0.9);">这种</font><font style="color:rgba(0, 0, 0, 0.9);">非靶标物种的？</font></p>
+<p><font style="color:rgba(0, 0, 0, 0.9);">methods中引用的是 Lyu et al., Genome Research 2023 的方法。原始论文将该流程称为 Spatial MetaTranscriptome（SMT)：从常规 spatial transcriptomics 数据中提取宿主未比对的 reads，进行微生物分类，并最终生成空间微生物丰度矩阵。</font></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563340064-f8dd28f3-0d1e-41eb-bf03-b94ab7be2bcd.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="技术流程"><a href="#技术流程" class="headerlink" title="技术流程"></a>技术流程</h3><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563410360-b41bbff1-ae31-4b5a-b3c3-f44a8927cc11.png" srcset="/img/loading.gif" lazyload></p>
+<p>使用的是**<font style="color:rgb(171, 25, 66);">基于blast注释细菌片段的方法，使用visium这种基于测序的空转技术，得到FASTQ文件后进行序列比对，其中的human-mapped reads被注释成免疫细胞，而unmapped reads 则使用</font><strong><strong><font style="color:rgb(171, 25, 66);">SMT</font></strong></strong><font style="color:rgb(171, 25, 66);">方法，经过质控，BLAST，majorty voting和环境污染</font><strong><strong><font style="color:rgb(171, 25, 66);">处理后计算visium 每个spot中的</font></strong></strong><font style="color:rgb(171, 25, 66);">Bacillus丰度</font><strong><font style="color:rgb(171, 25, 66);">，</font><font style="color:rgba(0, 0, 0, 0.9);">值得注意的是，由于</font><font style="color:rgba(0, 0, 0, 0.9);">SMT</font><font style="color:rgba(0, 0, 0, 0.9);">类似方法的局限性，</font></strong><font style="color:black;">Fig S4B</font>****<font style="color:black;">文字说明是</font><strong>_</strong><font style="color:#7030a0;">Bacillus</font><strong>_</strong><font style="color:#7030a0;">芽孢杆菌属</font><strong><font style="color:black;">而不是</font>_</strong><font style="color:#7f6000;">Bacillus cereus</font><strong>_</strong><font style="color:#7f6000;">蜡样芽孢杆菌。</font>**</p>
+<p><strong><font style="color:#7f6000;"></font></strong></p>
+<p><strong><font style="color:rgba(0, 0, 0, 0.9);">SMT方法</font></strong></p>
+<p><strong><font style="color:rgb(122, 79, 214);">1.Spatial barcode+UMI </font></strong></p>
+<ul>
+<li><font style="color:rgba(0, 0, 0, 0.9);">把reads分成 UMI groups，5 reads 不等于 5 个微生物分子，而是看UMI</font><em><font style="color:rgb(136, 136, 136);">（</font><strong><strong><font style="color:rgb(136, 136, 136);">Unique Molecular Identifier，一种用于去除PCR扩增偏倚、实现mRNA绝对定量的分子标签，在单细胞测序中用于准确追踪每个原始转录本。</font></strong></strong><font style="color:rgb(136, 136, 136);">）</font></em></li>
+</ul>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563463115-9286ab33-8ef0-4223-b427-01792c54642a.png" srcset="/img/loading.gif" lazyload></p>
+<p><em><font style="color:rgba(0, 0, 0, 0.9);">如Spot A的</font><strong><font style="color:rgba(0, 0, 0, 0.9);">spatial barcode</font></strong><font style="color:rgba(0, 0, 0, 0.9);">叫做 BC001；</font><strong><font style="color:rgba(0, 0, 0, 0.9);">捕获</font></strong><font style="color:rgba(0, 0, 0, 0.9);">的</font><strong><font style="color:rgba(0, 0, 0, 0.9);">RNA molecule，又有自己的 UMI</font></strong><font style="color:rgba(0, 0, 0, 0.9);">；</font>__<font style="color:rgba(0, 0, 0, 0.9);">建库和测序以后，同一个原始 RNA molecule 可能产生多条 reads</font></em></p>
+<p><strong><font style="color:rgb(122, 79, 214);">2.质控：去除 </font><strong><strong><font style="color:rgb(122, 79, 214);">low-complexity reads</font></strong></strong><font style="color:rgb(122, 79, 214);">等</font></strong></p>
+<p><strong><font style="color:rgb(122, 79, 214);">3.BLAST</font><strong><strong><font style="color:rgb(122, 79, 214);">到 </font></strong></strong><font style="color:rgb(122, 79, 214);">NCBI nucleotide database （</font><strong><strong><font style="color:rgb(122, 79, 214);">BLASTN 2.10.1+</font></strong></strong><font style="color:rgb(122, 79, 214);">）</font></strong></p>
+<p><strong><font style="color:rgb(122, 79, 214);">4.majority voting + </font>****<font style="color:rgb(122, 79, 214);">上归大类</font></strong></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563484097-5717674e-2ed0-4e56-9b24-db42379ecabf.png" srcset="/img/loading.gif" lazyload></p>
+<p><em>比如在UMI_002中主要的reads被认为归于某一种属</em></p>
+<p><strong><font style="color:rgb(122, 79, 214);">5.处理环境污染 </font></strong><font style="color:rgb(122, 79, 214);">(</font><font style="color:rgb(122, 79, 214);">真实瘤内菌还是样本污染？</font><font style="color:rgb(122, 79, 214);">)</font></p>
+<ul>
+<li><font style="color:black;">随机</font><font style="color:black;">重复</font><font style="color:black;">抽取相同数量的 spots</font><font style="color:black;">，分析其空间分布情况；</font></li>
+<li>明显聚集<font style="color:black;">则说明可能是</font><font style="color:black;">spatially clustered,随机分布更可能是污染</font></li>
+</ul>
+<p><strong><font style="color:rgb(122, 79, 214);">6.spatial microbial abundance 计算</font></strong></p>
+<ul>
+<li><font style="color:black;">每个spot 中，SMT 识别出了 N 个独立的、被归属于 Bacillus 的 UMI groups</font></li>
+</ul>
+<h3 id="SMT-类似方法的优点与局限"><a href="#SMT-类似方法的优点与局限" class="headerlink" title="SMT 类似方法的优点与局限"></a>SMT 类似方法的优点与局限</h3><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563526659-7992c520-86e5-45ff-8d48-3c1796553634.png" srcset="/img/loading.gif" lazyload></p>
+<p>纯基于blast注释细菌片段不那么solid, 因此图片也只被放在了补充材料里，假阳性的问题也难以完全规避；还有一些文章使用了16S probe的方法，比如Microbial signals in primary and metastatic brain tumors这篇。</p>
+<p>当然这篇文章用了大量的细胞和小鼠实验证明了此种菌的存在，下面简要梳理一下思路：</p>
+<h2 id="文章思路概览"><a href="#文章思路概览" class="headerlink" title="文章思路概览"></a>文章思路概览</h2><!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563584724-62479e62-2ce5-4420-9474-772786834c01.png" srcset="/img/loading.gif" lazyload></p>
+<!-- 这是一张图片，ocr 内容为： -->
+<p><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563599949-27b74202-3328-49fa-b31d-b674e244328f.png" srcset="/img/loading.gif" lazyload><!-- 这是一张图片，ocr 内容为： --><br><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563612418-730448f7-00f5-4521-ae7a-3da82a5beebb.png" srcset="/img/loading.gif" lazyload><!-- 这是一张图片，ocr 内容为： --><br><img src="https://typora-blog-1316195201.cos.ap-guangzhou.myqcloud.com/picture/Cancer-cell-2026_-visium--------------/1792563628281-53bfd8e3-c4e5-4bf3-b010-7acdfdc4837d.png" srcset="/img/loading.gif" lazyload></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/" class="category-chain-item">科研学习</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%A7%91%E7%A0%94%E5%AD%A6%E4%B9%A0/%E7%A9%BA%E9%97%B4%E7%BB%84%E5%AD%A6/" class="category-chain-item">空间组学</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Cancer-Cell/">#Cancer Cell</a>
+      
+        <a href="/tags/Visium/">#Visium</a>
+      
+        <a href="/tags/%E7%A9%BA%E9%97%B4%E8%BD%AC%E5%BD%95%E7%BB%84/">#空间转录组</a>
+      
+        <a href="/tags/%E7%98%A4%E5%86%85%E8%8F%8C/">#瘤内菌</a>
+      
+        <a href="/tags/SMT/">#SMT</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Cancer Cell 2026｜Visium 空间转录组如何检测非靶标瘤内菌</div>
+      <div>https://www.porpaxcc.com/2026/11/02/Cancer cell 2026_ visium空转技术如何检测非靶标瘤内菌/</div>
+    </div>
+    <div class="license-meta">
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>November 2, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/10/07/%E6%B5%8F%E8%A7%88%E4%BE%BF%E7%AD%BE%E6%8F%92%E4%BB%B6/" title="浏览器插件：浏览便签">
+                        <span class="hidden-mobile">浏览器插件：浏览便签</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"Porpax/porpax.github.io","repo-id":"R_kgDOJjghPw","category":"Announcements","category-id":"DIC_kwDOJjghP84DFdgI","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        Views: 
+        <span id="busuanzi_value_site_pv"></span>
+        
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        Visitors: 
+        <span id="busuanzi_value_site_uv"></span>
+        
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  
+<script src="/js/blog-translate.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
